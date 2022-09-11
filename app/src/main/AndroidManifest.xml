@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Pokedex"
         tools:targetApi="31">
         <activity
-            android:name="com.example.pokemen.MainActivity"
+            android:name="com.carlos.pokemen.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Pokedex">
