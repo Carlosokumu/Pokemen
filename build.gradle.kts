@@ -12,5 +12,6 @@ buildscript {
         classpath(libs.agp)
         classpath(libs.kotlin.gradlePlugin)
         classpath(libs.hilt.plugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     }
 }
