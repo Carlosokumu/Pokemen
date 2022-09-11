@@ -1,10 +1,12 @@
-
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
    // id 'com.android.application'
    // id 'org.jetbrains.kotlin.android'
     id(libs.plugins.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.hilt.plugin.get().pluginId)
 }
 
 android {
@@ -60,6 +62,11 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.compose.tooling)
     implementation(libs.androidx.compose.activity)
+
+
+    //di
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
 
     //Unit test
