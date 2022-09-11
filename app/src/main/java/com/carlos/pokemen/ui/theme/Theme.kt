@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.theme
+package com.example.pokemen.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
