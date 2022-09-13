@@ -54,6 +54,8 @@ android {
 
 dependencies {
 
+    // modules
+    implementation(project(":core-network"))
 
     // androidx
     implementation(libs.androidx.ktx)
@@ -62,7 +64,8 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.compose.tooling)
     implementation(libs.androidx.compose.activity)
-
+    implementation(libs.androidx.paging)
+    implementation(libs.coroutines)
 
     //di
     implementation(libs.hilt.android)

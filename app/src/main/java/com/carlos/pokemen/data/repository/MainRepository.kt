@@ -1,4 +1,6 @@
 package com.carlos.pokemen.data.repository
 
-class MainRepository {
+interface MainRepository {
+
+    suspend fun  fetchPokemonList(page: Int)
 }
