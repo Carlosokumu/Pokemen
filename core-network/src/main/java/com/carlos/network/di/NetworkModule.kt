@@ -1,6 +1,7 @@
 package com.carlos.network.di
 
-import com.google.gson.Gson
+import com.carlos.network.network.ApiClient
+import com.carlos.network.network.PokemenService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -9,7 +10,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URI.create
 import javax.inject.Singleton
 
 @Module
@@ -33,5 +33,10 @@ object NetworkModule {
     @Singleton
     fun providePokemenService(retrofit: Retrofit): PokemenService {
         return retrofit.create(PokemenService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideApiClient(pokemenService: PokemenService): ApiClient {
+        return ApiClient(pokemenService = pokemenService)
     }
 }
