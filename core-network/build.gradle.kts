@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+
+    implementation(libs.coroutines)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 

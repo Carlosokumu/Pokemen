@@ -57,6 +57,7 @@ dependencies {
     // modules
     implementation(project(":core-network"))
 
+
     // androidx
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.material.compose)
@@ -66,14 +67,18 @@ dependencies {
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.paging)
     implementation(libs.coroutines)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.hilt.navigation)
 
     //di
     implementation(libs.hilt.android)
+    implementation(libs.androidx.paging.ktx)
     kapt(libs.hilt.compiler)
 
+    implementation(libs.retrofit)
 
     //Unit test
-    testImplementation(libs.junit)
+   // testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.androidx.compose.junit)
