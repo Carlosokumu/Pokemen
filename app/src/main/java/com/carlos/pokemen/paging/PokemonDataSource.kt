@@ -7,6 +7,7 @@ import com.carlos.network.models.Pokemon
 import com.carlos.network.models.PokemonResponse
 import com.carlos.network.network.ApiCallResult
 import com.carlos.network.network.ApiClient
+import retrofit2.HttpException
 import java.io.IOException
 
 class PokemonDataSource(private val apiClient: ApiClient): PagingSource<Int, Pokemon>() {
