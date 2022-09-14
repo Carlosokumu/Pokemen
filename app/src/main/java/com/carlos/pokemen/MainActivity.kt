@@ -10,11 +10,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.carlos.pokemen.viewmodels.MainViewModel
 import com.example.pokemen.ui.theme.PokedexTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GetData(mainViewModel = )
         setContent {
             PokedexTheme {
                 // A surface container using the 'background' color from the theme
@@ -40,4 +43,10 @@ fun DefaultPreview() {
     PokedexTheme {
         Greeting("Android")
     }
+}
+
+@Composable
+fun GetData(mainViewModel: MainViewModel){
+    val trendingFilms = mainViewModel.pokemon.value.collectAsLazyPagingItems()
+    trendingFilms.get(0)?.name
 }
