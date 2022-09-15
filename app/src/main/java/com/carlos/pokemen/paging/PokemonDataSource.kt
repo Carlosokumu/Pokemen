@@ -14,12 +14,12 @@ class PokemonDataSource(private val apiClient: ApiClient): PagingSource<Int, Pok
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
-            val nextPage = params.key ?: 1
+            val nextPage = params.key ?: POKEMON_STARTING_INDEX
             val pokemonList = apiClient.fetchPokemonList(page = nextPage)
             LoadResult.Page(
                 data = pokemonList.results,
-                prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = if (pokemonList.results.isEmpty()) null else  1
+                prevKey = if (nextPage == 0) null else nextPage - 1,
+                nextKey = if (pokemonList.results.isEmpty()) null else  nextPage + 1
             )
 
         } catch (e: IOException) {
@@ -27,5 +27,9 @@ class PokemonDataSource(private val apiClient: ApiClient): PagingSource<Int, Pok
         } catch (e: HttpException) {
             return LoadResult.Error(e)
         }
+    }
+
+    companion object {
+       const val POKEMON_STARTING_INDEX = 0
     }
 }
