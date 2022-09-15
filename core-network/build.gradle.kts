@@ -51,5 +51,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp.interceptor)
     implementation(libs.gson)
+    implementation(libs.okhttp)
 
 }

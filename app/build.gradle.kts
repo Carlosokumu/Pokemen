@@ -76,6 +76,8 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit)
+    implementation(libs.okhttp.interceptor)
+    implementation(libs.okhttp)
 
     //Unit test
     //testImplementation(libs.junit)
