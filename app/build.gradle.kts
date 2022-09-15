@@ -78,7 +78,7 @@ dependencies {
     implementation(libs.retrofit)
 
     //Unit test
-   // testImplementation(libs.junit)
+    //testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.androidx.compose.junit)
