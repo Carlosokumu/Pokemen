@@ -70,6 +70,10 @@ dependencies {
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.hilt.navigation)
 
+
+    //Coil
+    implementation(libs.coil)
+
     //di
     implementation(libs.hilt.android)
     implementation(libs.androidx.paging.ktx)
@@ -80,7 +84,7 @@ dependencies {
     implementation(libs.okhttp)
 
     //Unit test
-    //testImplementation(libs.junit)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.androidx.compose.junit)
