@@ -38,6 +38,7 @@ android {
     kotlinOptions {
         //jvmTarget = '1.8'
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf("-Xjvm-default=all")
     }
     buildFeatures {
         compose = true
@@ -84,7 +85,7 @@ dependencies {
     implementation(libs.okhttp)
 
     //Unit test
-    testImplementation(libs.junit)
+   // testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.androidx.compose.junit)
