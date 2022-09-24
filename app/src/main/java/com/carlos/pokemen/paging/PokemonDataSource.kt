@@ -1,5 +1,6 @@
 package com.carlos.pokemen.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.carlos.network.models.Pokemon
@@ -15,7 +16,8 @@ class PokemonDataSource(private val apiClient: ApiClient): PagingSource<Int, Pok
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
             val nextPage = params.key ?: POKEMON_STARTING_INDEX
-            val pokemonList = apiClient.fetchPokemonList(page = nextPage)
+            Log.d("PAGENUMBER",nextPage.toString())
+            val pokemonList = apiClient.fetchPokemonList(page = nextPage * 20)
             LoadResult.Page(
                 data = pokemonList.results,
                 prevKey = if (nextPage == 0) null else nextPage - 1,
