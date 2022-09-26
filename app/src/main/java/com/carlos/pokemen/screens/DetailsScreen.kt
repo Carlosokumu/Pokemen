@@ -1,6 +1,7 @@
 package com.carlos.pokemen.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,29 +11,50 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.carlos.pokemen.ui.theme.mainColor
+import coil.compose.AsyncImage
+import com.carlos.pokemen.getImageUrl
+import com.carlos.pokemen.sharedcomposable.BackButton
+import com.carlos.pokemen.ui.theme.*
+import com.example.pokedex.R
+import java.security.AllPermission
 import kotlin.random.Random
 
-
+@Preview
 @Composable
 fun DetailsScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
+        TopBar()
         PokemonInfo()
-        Spacer(modifier = Modifier.size(10.dp))
+        Spacer(modifier = Modifier.size(5.dp))
         MoreInfo()
-        Spacer(modifier = Modifier.size(10.dp))
+        Spacer(modifier = Modifier.size(5.dp))
         PokemonMoves()
     }
 
+}
+
+@Preview
+@Composable
+fun TopBar(){
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .background(statusColor)) {
+        BackButton(modifier = Modifier.padding(10.dp)) {
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -45,50 +67,92 @@ fun PokemonInfo() {
         backgroundColor = Color.White
     ) {
         Column(verticalArrangement = Arrangement.SpaceEvenly) {
-            Text(text = "001")
+            Text(text = "001", modifier = Modifier.padding(start = 40.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = CenterVertically
             ) {
-                Text(text = "Kakuna")
-                Spacer(modifier = Modifier.size(10.dp))
-                Text(
-                    text = "Poison", style = typography.body1.merge(), modifier = Modifier
-                        .clip(
-                            shape = RoundedCornerShape(
-                                size = 5.dp,
-                            ),
-                        )
+                Text(text = "Kakuna",modifier = Modifier.padding(start = 40.dp))
 
-                        .background(mainColor)
-                )
-                Spacer(modifier = Modifier.size(10.dp))
+                Row {
+                    Text(
+                        text = "Poison", style = typography.body1.merge(), modifier = Modifier
+                            .clip(
+                                shape = RoundedCornerShape(
+                                    size = 5.dp,
+                                ),
+                            )
+
+                            .background(Color.Green)
+                            .padding(5.dp)
+                    )
+                    Spacer(modifier = Modifier.size(10.dp))
+                    Text(
+                        text = "Poison", style = typography.body1.merge(), modifier = Modifier
+                            .clip(
+                                shape = RoundedCornerShape(
+                                    size = 5.dp,
+                                ),
+                            )
+
+                            .background(mainColor)
+                            .padding(5.dp)
+                    )
+                    Spacer(modifier = Modifier.size(10.dp))
+                }
+
 
 
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(modifier = Modifier.wrapContentHeight()) {
+                Column(modifier = Modifier
+                    .wrapContentHeight()
+                    .padding(15.dp)) {
                     Text(text = "Hp")
-                    LinearProgressIndicator(progress = 0.5f, color = Color.Red)
+                    Spacer(modifier = Modifier.size(2.dp))
+                    LinearProgressIndicator(progress = 0.5f, color = Color.Green, modifier = Modifier
+                        .height(5.dp)
+                        .width(100.dp))
+                    Spacer(modifier = Modifier.size(10.dp))
+                    Text(text = "Attacking")
+                    Spacer(modifier = Modifier.size(2.dp))
+                    LinearProgressIndicator(progress = 0.5f,color = Color.Red,modifier = Modifier
+                        .height(5.dp)
+                        .width(100.dp))
                     Spacer(modifier = Modifier.size(5.dp))
-                    Text(text = "Hp")
-                    LinearProgressIndicator(progress = 0.5f)
+                    Text(text = "Defence")
+                    Spacer(modifier = Modifier.size(2.dp))
+                    LinearProgressIndicator(progress = 0.5f,color = Color.Yellow,modifier = Modifier
+                        .height(5.dp)
+                        .width(100.dp))
                     Spacer(modifier = Modifier.size(5.dp))
-                    Text(text = "Hp")
-                    LinearProgressIndicator(progress = 0.5f)
-                    Spacer(modifier = Modifier.size(5.dp))
-                    Text(text = "Hp")
-                    LinearProgressIndicator(progress = 0.5f)
+                    Text(text = "Speed")
+                    Spacer(modifier = Modifier.size(2.dp))
+                    LinearProgressIndicator(progress = 0.5f,color = gold,modifier = Modifier
+                        .height(5.dp)
+                        .width(100.dp))
+                    Spacer(modifier = Modifier.size(10.dp))
 
                 }
-                Text(
-                    text = "Hello",
-                    color = Color.Black,
-                    modifier = Modifier.align(CenterVertically)
+                AsyncImage(
+                    model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                    modifier = Modifier
+                        .align(CenterVertically)
+                        .height(100.dp)
+                        .wrapContentWidth()
+                        .padding(20.dp),
+                    contentDescription = null
                 )
+
+//                Image(
+//                    modifier = Modifier.align(CenterVertically),
+//                    painter = painterResource(R.drawable.ic_search),
+//                    contentDescription = "Vegetable",
+//                )
 
             }
         }
@@ -100,22 +164,31 @@ fun PokemonInfo() {
 fun MoreInfo() {
     Card(elevation = 10.dp, shape = RectangleShape, modifier = Modifier.padding(8.dp)) {
         Column(verticalArrangement = Arrangement.Center) {
-            Text(text = "Breeding", color = Color.Black, modifier = Modifier.padding(10.dp))
+            Text(text = "Breeding", color = Color.Black, modifier = Modifier.padding(start = 10.dp,top = 5.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
-                Column {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     // Text(text = "Breeding", color = Color.Black)
                     Spacer(modifier = Modifier.size(10.dp))
-                    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .align(CenterHorizontally), horizontalArrangement = Arrangement.Center) {
 
                         Column {
                             Text(
                                 text = "Height",
                                 color = Color.Black,
-                                modifier = Modifier.padding(10.dp)
+                                modifier = Modifier
+                                    .padding(5.dp)
+                                    .align(CenterHorizontally)
                             )
                             Card(
                                 border = BorderStroke(1.dp, Color.LightGray),
-                                modifier = Modifier.padding(10.dp)
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .alpha(1f),
+                                backgroundColor = platinum
+
+
                             ) {
                                 Row(horizontalArrangement = Arrangement.SpaceAround) {
                                     Text(
@@ -130,19 +203,20 @@ fun MoreInfo() {
                                     )
                                 }
                             }
-//                            Row(horizontalArrangement = Arrangement.SpaceBetween) {
-//                                Text(text = "123", color = Color.Black)
-//                            }
+
                         }
                         Column {
                             Text(
                                 text = "Weight",
                                 color = Color.Black,
-                                modifier = Modifier.padding(10.dp)
+                                modifier = Modifier
+                                    .padding(5.dp)
+                                    .align(CenterHorizontally)
                             )
                             Card(
                                 border = BorderStroke(1.dp, Color.LightGray),
                                 modifier = Modifier.padding(10.dp),
+                                backgroundColor = platinum,
                                 shape = RectangleShape
                             ) {
                                 Row(horizontalArrangement = Arrangement.SpaceBetween) {
@@ -177,8 +251,8 @@ fun PokemonMoves() {
     val moves = listOf<String>("Sombero","Night Move","Dragon Move","Elcalsic","Saton","Ramboz")
     Card(elevation = 10.dp, shape = RectangleShape, modifier = Modifier.padding(8.dp)) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
-                Text(text = "Moves", fontSize = 14.sp, modifier = Modifier.padding(10.dp))
+            Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth(), verticalAlignment = CenterVertically) {
+                Text(text = "Moves", fontSize = 14.sp,color = Color.Black)
                 Button(
                     onClick = {
 
@@ -200,7 +274,9 @@ fun PokemonMoves() {
             LazyVerticalGrid( GridCells.Fixed(2),contentPadding = PaddingValues(8.dp)){
                 items(moves) { item ->
                     Card(
-                        modifier = Modifier.padding(4.dp),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .wrapContentHeight(),
                         backgroundColor = Color(
                             red = Random.nextInt(0, 255),
                             green = Random.nextInt(0, 255),
@@ -209,7 +285,6 @@ fun PokemonMoves() {
                     ) {
                         Text(
                             text = item,
-                            fontSize = 42.sp,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(24.dp)
                         )
