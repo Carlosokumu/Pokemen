@@ -4,6 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.carlos.network.models.Pokemon
+import com.carlos.network.models.PokemonInfo
+import com.carlos.network.network.ApiCallResult
 import com.carlos.network.network.ApiClient
 import com.carlos.network.network.safeApiCall
 import com.carlos.pokemen.paging.PokemonDataSource
@@ -22,8 +24,9 @@ class MainRepositoryImp @Inject constructor(private val apiClient: ApiClient): M
         ).flow
     }
 
-
-
+    override suspend fun fetchPokemonInfo(name: String): ApiCallResult<PokemonInfo> {
+        return apiClient.fetchPokemonInfo(name = name)
+    }
 
 
 }
