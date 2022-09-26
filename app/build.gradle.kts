@@ -7,6 +7,7 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
     id(libs.plugins.hilt.plugin.get().pluginId)
+    id("com.google.devtools.ksp")  version "1.6.10-1.0.2"
 }
 
 android {
@@ -51,6 +52,14 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -70,6 +79,11 @@ dependencies {
     implementation(libs.coroutines)
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.hilt.navigation)
+    implementation(libs.toolbar)
+    implementation(libs.motion)
+    implementation(libs.segmented)
+    implementation("androidx.palette:palette:1.0.0")
+
 
 
     //Coil
@@ -84,8 +98,11 @@ dependencies {
     implementation(libs.okhttp.interceptor)
     implementation(libs.okhttp)
 
+    implementation(libs.destination.ramcosta)
+    ksp(libs.ksp.ramcosta)
+
     //Unit test
-   // testImplementation(libs.junit)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.androidx.compose.junit)
