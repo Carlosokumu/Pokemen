@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -28,6 +29,7 @@ import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.interfaces.ToolbarState
 import com.carlos.pokemen.navigation.MainActions
 import com.carlos.pokemen.ui.theme.Purple700
+import com.carlos.pokemen.ui.theme.statusColor
 import com.carlos.pokemen.viewmodels.MainViewModel
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
@@ -53,37 +55,18 @@ fun Home(
     {
       PokemonListView(homeViewModel = homeViewModel, state = lazyScrollState, mainActions = mainActions)
     }
-//    Scaffold(
-//        topBar = {
-//            TopBar(lazyScrollState)
-//        }
-//    )  {
-//        //PokemonList(state = lazyScrollState, mainViewModel = homeViewModel, mainActions = mainActions)
-//        PokemonListView(homeViewModel = homeViewModel)
-//
-//    }
 
-//    Surface {
-//        Column() {
-//            CollapsingToolbar()
-//            //  PokemonList(mainViewModel = homeViewModel, state = lazyScrollState, mainActions = mainActions)
-//            PokemonListView(homeViewModel = homeViewModel)
-//        }
-//
-//    }
-
-    //  PokemonListView(homeViewModel = homeViewModel)
 }
 
 
-//}
 
 
+@Preview
 @Composable
 fun CollapsingToolbar() {
     Column(
         modifier = Modifier
-            .background(Purple700),
+            .background(statusColor),
         verticalArrangement = Arrangement.Center
     ) {
         Column(
@@ -114,7 +97,7 @@ fun CollapsingToolbar() {
                 onValueChange = {},
                 placeholder = {
                     Text(
-                        text = "Carl Sayuran",
+                        text = "eg Kakuna",
                         color = Color.Black
                     )
                 },
@@ -147,42 +130,7 @@ fun CollapsingToolbar() {
                     }
                 },
 
-                //LaunchedEffect(key1 = , key2 = , key3 = , block = )
 
-
-//
-//                modifier = Modifier
-//                    .fillMaxWidth(),
-//                    .background(Color.White, shape = RoundedCornerShape(8.dp))
-//                    .clickable {
-//
-//                    },
-//                shape = RoundedCornerShape(size = 8.dp),
-////                keyboardOptions = KeyboardOptions(
-////                    capitalization = KeyboardCapitalization.Words,
-////                    autoCorrect = true,
-////                    keyboardType = KeyboardType.Text,
-////                ),
-//                colors = TextFieldDefaults.textFieldColors(
-//                    textColor = Color.White,
-//                    disabledTextColor = Color.White,
-//                    backgroundColor = Color.White,
-//                    focusedIndicatorColor = Color.White,
-//                    unfocusedIndicatorColor = Color.White,
-//                    disabledIndicatorColor = Color.White
-//                ),
-//               // textStyle = TextStyle(color = Color.Black),
-//                maxLines = 1,
-//                singleLine = true,
-//                leadingIcon = {
-//                    Icon(
-//                        modifier = Modifier
-//                            .size(24.dp),
-//                        painter = painterResource(id = R.drawable.ic_search),
-//                        contentDescription = null,
-//                        tint = Color.Gray
-//                    )
-//                },
 
             )
             Spacer(modifier = Modifier.size(10.dp))
@@ -284,11 +232,6 @@ fun PokemonList(mainViewModel: MainViewModel, state: LazyGridState, mainActions:
 }
 
 
-@Composable
-private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
-    TODO() //Return a 'ToolbarState' implementation and preserve its internal state.
-    //LazyColumn(content = )
-}
 
 
 
