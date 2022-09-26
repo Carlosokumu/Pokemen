@@ -2,28 +2,23 @@ package com.carlos.pokemen.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,44 +26,73 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.interfaces.ToolbarState
+import com.carlos.pokemen.navigation.MainActions
 import com.carlos.pokemen.ui.theme.Purple700
 import com.carlos.pokemen.viewmodels.MainViewModel
-import com.example.pokedex.R
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
+import me.onebone.toolbar.rememberCollapsingToolbarState
 
 
 @Composable
 fun Home(
-    homeViewModel: MainViewModel = hiltViewModel(),navigator: DestinationsNavigator
-){
+    homeViewModel: MainViewModel = hiltViewModel(), mainActions: MainActions
+) {
 
     val lazyScrollState = rememberLazyGridState()
-    Scaffold(
-        topBar = {
-            TopBar(lazyScrollState)
+    val state =  rememberCollapsingToolbarScaffoldState()
+    CollapsingToolbarScaffold(
+        modifier = Modifier.fillMaxSize(),
+        state = state,
+        scrollStrategy = ScrollStrategy.EnterAlwaysCollapsed,
+        toolbar = {
+            CollapsingToolbar()
         }
-    )  {
-        PokemonList(state = lazyScrollState, mainViewModel = homeViewModel)
-
+    )
+    {
+      PokemonListView(homeViewModel = homeViewModel, state = lazyScrollState, mainActions = mainActions)
     }
+//    Scaffold(
+//        topBar = {
+//            TopBar(lazyScrollState)
+//        }
+//    )  {
+//        //PokemonList(state = lazyScrollState, mainViewModel = homeViewModel, mainActions = mainActions)
+//        PokemonListView(homeViewModel = homeViewModel)
+//
+//    }
 
+//    Surface {
+//        Column() {
+//            CollapsingToolbar()
+//            //  PokemonList(mainViewModel = homeViewModel, state = lazyScrollState, mainActions = mainActions)
+//            PokemonListView(homeViewModel = homeViewModel)
+//        }
+//
+//    }
 
-
-
+    //  PokemonListView(homeViewModel = homeViewModel)
 }
+
+
+//}
 
 
 @Composable
 fun CollapsingToolbar() {
-    Column( modifier = Modifier
-        .background(Purple700),
-        verticalArrangement = Arrangement.Center) {
+    Column(
+        modifier = Modifier
+            .background(Purple700),
+        verticalArrangement = Arrangement.Center
+    ) {
         Column(
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.size(10.dp))
             Text(
                 text = "Who are you looking for?",
                 color = Color.White,
@@ -76,47 +100,29 @@ fun CollapsingToolbar() {
             )
             Spacer(modifier = Modifier.size(10.dp))
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.White,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                ),
                 value = "",
-                onValueChange = {
-
-                },
+                shape = RoundedCornerShape(32.dp),
+                singleLine = true,
+                onValueChange = {},
                 placeholder = {
                     Text(
-                        text = "Search",
-                        //color = primaryGray
+                        text = "Carl Sayuran",
+                        color = Color.Black
                     )
                 },
-
-                modifier = Modifier
-                    .fillMaxWidth(0.80f)
-                    .background(Color.White, shape = RoundedCornerShape(8.dp))
-                    .clickable {
-
-                    },
-                shape = RoundedCornerShape(size = 8.dp),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Words,
-                    autoCorrect = true,
-                    keyboardType = KeyboardType.Text,
-                ),
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color.White,
-                    disabledTextColor = Color.White,
-                    backgroundColor = Color.White,
-                    focusedIndicatorColor = Color.White,
-                    unfocusedIndicatorColor = Color.White,
-                    disabledIndicatorColor = Color.White
-                ),
-                textStyle = TextStyle(color = Color.Black),
-                maxLines = 1,
-                singleLine = true,
                 leadingIcon = {
                     Icon(
-                        modifier = Modifier
-                            .size(24.dp),
-                        painter = painterResource(id = R.drawable.ic_search),
-                        contentDescription = null,
-                        tint = Color.Gray
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "",
+                        tint = Color.Black
                     )
                 },
                 trailingIcon = {
@@ -139,7 +145,45 @@ fun CollapsingToolbar() {
                             tint = Color.Gray
                         )
                     }
-                }
+                },
+
+                //LaunchedEffect(key1 = , key2 = , key3 = , block = )
+
+
+//
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+//                    .background(Color.White, shape = RoundedCornerShape(8.dp))
+//                    .clickable {
+//
+//                    },
+//                shape = RoundedCornerShape(size = 8.dp),
+////                keyboardOptions = KeyboardOptions(
+////                    capitalization = KeyboardCapitalization.Words,
+////                    autoCorrect = true,
+////                    keyboardType = KeyboardType.Text,
+////                ),
+//                colors = TextFieldDefaults.textFieldColors(
+//                    textColor = Color.White,
+//                    disabledTextColor = Color.White,
+//                    backgroundColor = Color.White,
+//                    focusedIndicatorColor = Color.White,
+//                    unfocusedIndicatorColor = Color.White,
+//                    disabledIndicatorColor = Color.White
+//                ),
+//               // textStyle = TextStyle(color = Color.Black),
+//                maxLines = 1,
+//                singleLine = true,
+//                leadingIcon = {
+//                    Icon(
+//                        modifier = Modifier
+//                            .size(24.dp),
+//                        painter = painterResource(id = R.drawable.ic_search),
+//                        contentDescription = null,
+//                        tint = Color.Gray
+//                    )
+//                },
+
             )
             Spacer(modifier = Modifier.size(10.dp))
 
@@ -151,12 +195,11 @@ fun CollapsingToolbar() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PokemonList(mainViewModel: MainViewModel,state: LazyGridState) {
+fun PokemonList(mainViewModel: MainViewModel, state: LazyGridState, mainActions: MainActions) {
 
     mainViewModel.getPokemonList()
     val pokemons = mainViewModel.pokemon.value.collectAsLazyPagingItems()
 
-    val n = rememberScrollState()
 
 
     LazyVerticalGrid(
@@ -164,12 +207,13 @@ fun PokemonList(mainViewModel: MainViewModel,state: LazyGridState) {
         contentPadding = PaddingValues(8.dp),
         state = state
     ) {
-        items(pokemons.itemCount){ index ->
+
+        items(pokemons.itemCount) { index ->
             Card(
                 modifier = Modifier.padding(4.dp),
                 elevation = 10.dp,
                 onClick = {
-
+                    mainActions.gotoDetailsScreen()
                 },
                 backgroundColor = Color.White
             ) {
@@ -204,6 +248,30 @@ fun PokemonList(mainViewModel: MainViewModel,state: LazyGridState) {
                             model = getImageUrl(pokemons[index]!!.url),
                             contentDescription = null
                         )
+                        val context = LocalContext.current
+
+//                        val imageLoader = ImageLoader(context)
+//
+//                        val request = ImageRequest.Builder(context)
+//                            .transformations(RoundedCornersTransformation(12.dp.value))
+//                            .data()
+//                            .build()
+//
+//                        val imagePainter = rememberCoilPainter(
+//                            request = request,
+//                            imageLoader = imageLoader
+//                        )
+//
+//                        LaunchedEffect(key1 = imagePainter) {
+//                            launch {
+//                                val result = (imageLoader.execute(request) as SuccessResult).drawable
+//                                val bitmap = (result as BitmapDrawable).bitmap
+//                                val vibrant = Palette.from(bitmap)
+//                                    .generate()
+//                                    .getVibrantColor(defaultColor)
+//                                // do something with vibrant color
+//                            }
+//                        }
 
                     }
 
