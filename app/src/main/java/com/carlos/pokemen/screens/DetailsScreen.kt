@@ -1,5 +1,6 @@
 package com.carlos.pokemen.screens
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,15 +29,19 @@ import coil.compose.AsyncImage
 import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.sharedcomposable.BackButton
 import com.carlos.pokemen.ui.theme.*
+import com.carlos.pokemen.viewmodels.DetailsViewModel
 import com.example.pokedex.R
 import java.security.AllPermission
 import kotlin.random.Random
 
-@Preview
+
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(detailsViewModel: DetailsViewModel,name: String?,index: Int?) {
+    Log.d("NamePokemon",index!!.toString())
+
+    detailsViewModel.fetchPokemonDetails(name = "kakuna")
     Column(modifier = Modifier.fillMaxSize()) {
-        TopBar()
+        TopBar(name = name!!)
         PokemonInfo()
         Spacer(modifier = Modifier.size(5.dp))
         MoreInfo()
@@ -46,14 +51,17 @@ fun DetailsScreen() {
 
 }
 
-@Preview
+
 @Composable
-fun TopBar(){
+fun TopBar(name: String){
     Row(modifier = Modifier
         .fillMaxWidth()
-        .background(statusColor)) {
+        .background(statusColor), verticalAlignment = CenterVertically, horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         BackButton(modifier = Modifier.padding(10.dp)) {
         }
+        Text(text = name,color = Color.White,modifier = Modifier.padding(10.dp))
+        Text(text = "#001",color = Color.Black, modifier = Modifier.padding(10.dp))
     }
 }
 
@@ -67,13 +75,13 @@ fun PokemonInfo() {
         backgroundColor = Color.White
     ) {
         Column(verticalArrangement = Arrangement.SpaceEvenly) {
-            Text(text = "001", modifier = Modifier.padding(start = 40.dp))
+            Text(text = "#001", modifier = Modifier.padding(start = 40.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = CenterVertically
             ) {
-                Text(text = "Kakuna",modifier = Modifier.padding(start = 40.dp))
+                Text(text = "Kakuna",modifier = Modifier.padding(start = 40.dp),color = statusColor)
 
                 Row {
                     Text(
@@ -113,28 +121,28 @@ fun PokemonInfo() {
                     .wrapContentHeight()
                     .padding(15.dp)) {
                     Text(text = "Hp")
-                    Spacer(modifier = Modifier.size(2.dp))
+                    Spacer(modifier = Modifier.size(5.dp))
                     LinearProgressIndicator(progress = 0.5f, color = Color.Green, modifier = Modifier
                         .height(5.dp)
-                        .width(100.dp))
+                        .width(150.dp))
                     Spacer(modifier = Modifier.size(10.dp))
                     Text(text = "Attacking")
-                    Spacer(modifier = Modifier.size(2.dp))
+                    Spacer(modifier = Modifier.size(5.dp))
                     LinearProgressIndicator(progress = 0.5f,color = Color.Red,modifier = Modifier
                         .height(5.dp)
-                        .width(100.dp))
+                        .width(150.dp))
                     Spacer(modifier = Modifier.size(5.dp))
                     Text(text = "Defence")
-                    Spacer(modifier = Modifier.size(2.dp))
+                    Spacer(modifier = Modifier.size(5.dp))
                     LinearProgressIndicator(progress = 0.5f,color = Color.Yellow,modifier = Modifier
                         .height(5.dp)
-                        .width(100.dp))
+                        .width(150.dp))
                     Spacer(modifier = Modifier.size(5.dp))
                     Text(text = "Speed")
-                    Spacer(modifier = Modifier.size(2.dp))
+                    Spacer(modifier = Modifier.size(5.dp))
                     LinearProgressIndicator(progress = 0.5f,color = gold,modifier = Modifier
                         .height(5.dp)
-                        .width(100.dp))
+                        .width(150.dp))
                     Spacer(modifier = Modifier.size(10.dp))
 
                 }
@@ -148,11 +156,7 @@ fun PokemonInfo() {
                     contentDescription = null
                 )
 
-//                Image(
-//                    modifier = Modifier.align(CenterVertically),
-//                    painter = painterResource(R.drawable.ic_search),
-//                    contentDescription = "Vegetable",
-//                )
+
 
             }
         }
@@ -182,7 +186,7 @@ fun MoreInfo() {
                                     .align(CenterHorizontally)
                             )
                             Card(
-                                border = BorderStroke(1.dp, Color.LightGray),
+                                border = BorderStroke(1.dp, lightSilver),
                                 modifier = Modifier
                                     .padding(10.dp)
                                     .alpha(1f),
@@ -194,12 +198,12 @@ fun MoreInfo() {
                                     Text(
                                         text = "204",
                                         color = Color.Black,
-                                        modifier = Modifier.padding(5.dp)
+                                        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 20.dp,end = 20.dp)
                                     )
                                     Text(
                                         text = "204",
                                         color = Color.Black,
-                                        modifier = Modifier.padding(5.dp)
+                                        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 20.dp,end = 20.dp)
                                     )
                                 }
                             }
@@ -214,7 +218,7 @@ fun MoreInfo() {
                                     .align(CenterHorizontally)
                             )
                             Card(
-                                border = BorderStroke(1.dp, Color.LightGray),
+                                border = BorderStroke(1.dp, lightSilver),
                                 modifier = Modifier.padding(10.dp),
                                 backgroundColor = platinum,
                                 shape = RectangleShape
@@ -223,21 +227,20 @@ fun MoreInfo() {
                                     Text(
                                         text = "204",
                                         color = Color.Black,
-                                        modifier = Modifier.padding(5.dp)
+                                        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 20.dp,end = 20.dp)
                                     )
                                     Text(
                                         text = "204",
                                         color = Color.Black,
-                                        modifier = Modifier.padding(5.dp)
+                                        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 20.dp,end = 20.dp)
                                     )
                                 }
                             }
-//                            Row(horizontalArrangement = Arrangement.SpaceBetween) {
-//                                Text(text = "123", color = Color.Black)
-//                            }
+
                         }
 
                     }
+                    Spacer(modifier = Modifier.size(5.dp))
 
                 }
             }
