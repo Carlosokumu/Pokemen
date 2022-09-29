@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.palette.graphics.Palette
 import coil.ImageLoader
-import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -29,13 +28,13 @@ import coil.request.SuccessResult
 import coil.size.Size
 import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.navigation.MainActions
-import com.carlos.pokemen.viewmodels.MainViewModel
+import com.carlos.pokemen.viewmodels.HomeViewModel
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PokemonListView(homeViewModel: MainViewModel,state: LazyGridState,mainActions: MainActions) {
+fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActions: MainActions) {
     var color: Int? = null
 
     val pokemons = homeViewModel.pokemon.value.collectAsLazyPagingItems()
@@ -55,7 +54,7 @@ fun PokemonListView(homeViewModel: MainViewModel,state: LazyGridState,mainAction
                 modifier = Modifier.padding(4.dp),
                 elevation = 10.dp,
                 onClick = {
-                    mainActions.gotoDetailsScreen()
+                    mainActions.gotoDetailsScreen(pokemons[index]!!.name,index)
                 },
                 backgroundColor =  Color.White
             ) {
@@ -113,30 +112,11 @@ fun PokemonListView(homeViewModel: MainViewModel,state: LazyGridState,mainAction
                                 }
 
                             }
-                       //     PokeMonView(color = Color(color ?: 12222), homeViewModel = homeViewModel )
+
                         }
 
 
-//                        LaunchedEffect(key1 = imagePainter) {
-//                            launch {
-//
-//                                val result = (imageLoader.execute(imagePainter.request) as SuccessResult).drawable
-//                                when()
-//                                val bitmap = (result as BitmapDrawable).bitmap
-//                                val vibrant = Palette.from(bitmap)
-//                                    .generate()
-//                                  color =   vibrant.darkMutedSwatch?.rgb
-//                                 Log.d("COLORGEN",color.toString())
-//                                // do something with vibrant color
-//                            }
-//                        }
-//                        AsyncImage(
-//                            model = getImageUrl(pokemons[index]!!.url),
-//                            contentDescription = null
-//                        )
-//                        Card(backgroundColor = Color(color ?: 1222), modifier = Modifier.size(10.dp)) {
-//
-//                        }
+
                     }
                 }
             }
@@ -147,7 +127,7 @@ fun PokemonListView(homeViewModel: MainViewModel,state: LazyGridState,mainAction
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PokeMonView(color: Color?,homeViewModel: MainViewModel) {
+fun PokeMonView(color: Color?,homeViewModel: HomeViewModel) {
     val pokemons = homeViewModel.pokemon.value.collectAsLazyPagingItems()
     LaunchedEffect(key1 = 10) {
         homeViewModel.getPokemonList()
