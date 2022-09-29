@@ -26,20 +26,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.carlos.pokemen.getImageUrl
-import com.carlos.pokemen.interfaces.ToolbarState
 import com.carlos.pokemen.navigation.MainActions
-import com.carlos.pokemen.ui.theme.Purple700
 import com.carlos.pokemen.ui.theme.statusColor
-import com.carlos.pokemen.viewmodels.MainViewModel
+import com.carlos.pokemen.viewmodels.HomeViewModel
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
-import me.onebone.toolbar.rememberCollapsingToolbarState
 
 
 @Composable
 fun Home(
-    homeViewModel: MainViewModel = hiltViewModel(), mainActions: MainActions
+    homeViewModel: HomeViewModel = hiltViewModel(), mainActions: MainActions
 ) {
 
     val lazyScrollState = rememberLazyGridState()
@@ -97,7 +94,7 @@ fun CollapsingToolbar() {
                 onValueChange = {},
                 placeholder = {
                     Text(
-                        text = "eg Kakuna",
+                        text = "e.g kakuna",
                         color = Color.Black
                     )
                 },
@@ -141,95 +138,7 @@ fun CollapsingToolbar() {
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun PokemonList(mainViewModel: MainViewModel, state: LazyGridState, mainActions: MainActions) {
 
-    mainViewModel.getPokemonList()
-    val pokemons = mainViewModel.pokemon.value.collectAsLazyPagingItems()
-
-
-
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(8.dp),
-        state = state
-    ) {
-
-        items(pokemons.itemCount) { index ->
-            Card(
-                modifier = Modifier.padding(4.dp),
-                elevation = 10.dp,
-                onClick = {
-                    mainActions.gotoDetailsScreen()
-                },
-                backgroundColor = Color.White
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .wrapContentHeight()
-                            .fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 6.dp, start = 6.dp, end = 6.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.Top,
-                        ) {
-                            Text(
-                                text = pokemons[index]!!.name,
-                                color = Color.Blue,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = index.toString(),
-                                color = Color.Black,
-                                textAlign = TextAlign.Center,
-                            )
-                        }
-                        AsyncImage(
-                            model = getImageUrl(pokemons[index]!!.url),
-                            contentDescription = null
-                        )
-                        val context = LocalContext.current
-
-//                        val imageLoader = ImageLoader(context)
-//
-//                        val request = ImageRequest.Builder(context)
-//                            .transformations(RoundedCornersTransformation(12.dp.value))
-//                            .data()
-//                            .build()
-//
-//                        val imagePainter = rememberCoilPainter(
-//                            request = request,
-//                            imageLoader = imageLoader
-//                        )
-//
-//                        LaunchedEffect(key1 = imagePainter) {
-//                            launch {
-//                                val result = (imageLoader.execute(request) as SuccessResult).drawable
-//                                val bitmap = (result as BitmapDrawable).bitmap
-//                                val vibrant = Palette.from(bitmap)
-//                                    .generate()
-//                                    .getVibrantColor(defaultColor)
-//                                // do something with vibrant color
-//                            }
-//                        }
-
-                    }
-
-
-                }
-            }
-        }
-
-    }
-}
 
 
 
