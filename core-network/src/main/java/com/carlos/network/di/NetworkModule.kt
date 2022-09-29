@@ -8,6 +8,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -50,8 +52,8 @@ object NetworkModule {
     }
     @Provides
     @Singleton
-    fun provideApiClient(pokemenService: PokemenService): ApiClient {
-        return ApiClient(pokemenService = pokemenService)
+    fun provideApiClient(pokemenService: PokemenService,dispatcher: CoroutineDispatcher): ApiClient {
+        return ApiClient(pokemenService = pokemenService, dispatcher = dispatcher)
     }
 
     @Provides
@@ -64,4 +66,7 @@ object NetworkModule {
         }
         return interceptor
     }
+
+    @Provides
+    fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }
