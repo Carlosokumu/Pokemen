@@ -1,25 +1,31 @@
 package com.carlos.network.models
 
+import com.google.gson.annotations.SerializedName
 import kotlin.random.Random
 
 class PokemonInfo(
     val name: String,
-    val hp: Int = Random.nextInt(maxHp),
-    val attack: Int = Random.nextInt(maxAttack),
-    val defense: Int = Random.nextInt(maxDefense),
-    val speed: Int = Random.nextInt(maxSpeed),
+    @SerializedName("hp")
+    val HP: Int = Random.nextInt(maxHp),
+    @SerializedName("attack")
+    val ATK: Int = Random.nextInt(maxAttack),
+    @SerializedName("defence")
+    val DEF: Int = Random.nextInt(maxDefense),
+    @SerializedName("speed")
+    val SPD: Int = Random.nextInt(maxSpeed),
     val exp: Int = Random.nextInt(maxExp),
     val height: Int,
-     val weight: Int
+    val weight: Int,
+    val stats: List<Stats>
 ) {
 
 
     fun getWeightString(): String = String.format("%.1f KG", weight.toFloat() / 10)
     fun getHeightString(): String = String.format("%.1f M", height.toFloat() / 10)
-    fun getHpString(): String = "$hp/$maxHp"
-    fun getAttackString(): String = "$attack/$maxAttack"
-    fun getDefenseString(): String = "$defense/$maxDefense"
-    fun getSpeedString(): String = "$speed/$maxSpeed"
+    fun getHpFloat(base_stat: Int): Float =  (base_stat/ maxHp).toFloat()
+    fun getAttackString(): String = "$ATK/$maxAttack"
+    fun getDefenseString(): String = "$DEF/$maxDefense"
+    fun getSpeedString(): String = "$SPD/$maxSpeed"
     fun getExpString(): String = "$exp/$maxExp"
 
     companion object {
@@ -30,3 +36,7 @@ class PokemonInfo(
         const val maxExp = 1000
     }
 }
+
+data class Stats(val base_stat: Int,val stat: Stat)
+
+data class Stat(val name: String)
