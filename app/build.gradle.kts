@@ -82,7 +82,12 @@ dependencies {
     implementation(libs.toolbar)
     implementation(libs.motion)
     implementation(libs.segmented)
-    implementation("androidx.palette:palette:1.0.0")
+
+    implementation(libs.androidx.pallete)
+
+
+
+
 
 
 
