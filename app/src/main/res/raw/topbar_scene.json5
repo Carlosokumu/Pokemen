@@ -1,0 +1,32 @@
+{
+  ConstraintSets: {
+    start: {
+       text_title : {
+         start: ['parent', 'start'],
+         top: ['parent', 'top'],
+         bottom: ['text_input', 'top'],
+         end: ['parent', 'end']
+       },
+      text_input : {
+        start: ['parent', 'start'],
+        top: ['text_title', 'bottom'],
+        bottom: ['parent', 'bottom'],
+        end: ['parent', 'end']
+      }
+    },
+    end: {
+      text_title : {
+        start: ['parent', 'start'],
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom'],
+        end: ['parent', 'end']
+      },
+//      text_input : {
+//        start: ['parent', 'start'],
+//        top: ['text_title', 'bottom'],
+//        bottom: ['parent', 'bottom'],
+//        end: ['parent', 'end']
+//      }
+    }
+  }
+}

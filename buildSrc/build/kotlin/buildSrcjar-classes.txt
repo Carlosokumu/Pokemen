@@ -1,0 +1,1 @@
+C:\Users\Carlos\AndroidStudioProjects\Pokemen\buildSrc\build\classes\kotlin\main\Configuration.class
