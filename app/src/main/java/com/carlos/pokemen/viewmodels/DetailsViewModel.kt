@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlos.network.models.PokemonInfo
 import com.carlos.network.models.PokemonState
+import com.carlos.network.models.Specie
 import com.carlos.network.network.ApiCallResult
 import com.carlos.pokemen.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +35,8 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
         height = 0,
         weight = 0,
         stats = emptyList(),
-        types = emptyList()
+        types = emptyList(),
+        species = Specie(name ="","url")
     ))
 
     val pokemonInfo = _pokemonInfo.asStateFlow()

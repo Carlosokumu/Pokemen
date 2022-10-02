@@ -1,7 +1,6 @@
 package com.carlos.pokemen.screens
 
 import android.graphics.drawable.BitmapDrawable
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -17,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.palette.graphics.Palette
@@ -30,8 +28,9 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.size.Size
 import com.carlos.network.models.Pokemon
-import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.navigation.MainActions
+import com.carlos.pokemen.ui.theme.Typography
+import com.carlos.pokemen.utils.PokemonUtils
 import com.carlos.pokemen.viewmodels.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -59,7 +58,7 @@ fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActi
 
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(getImageUrl(url = pokemons[index]!!.url))
+                    .data(PokemonUtils.getImageUrl(url = pokemons[index]!!.url))
                     .allowHardware(false)
                     .size(Size.ORIGINAL) // Set the target size to load the image at.
                     .build()
@@ -97,6 +96,7 @@ fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActi
         }
     }
 }
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonCard(cardBackground: Color,mainActions: MainActions,pokemon: Pokemon,index: Int){
@@ -104,7 +104,7 @@ fun PokemonCard(cardBackground: Color,mainActions: MainActions,pokemon: Pokemon,
         modifier = Modifier.padding(4.dp),
         elevation = 10.dp,
         onClick = {
-            mainActions.gotoDetailsScreen(pokemon.name, index)
+            mainActions.gotoDetailsScreen(pokemon.name, index,"home")
         },
         backgroundColor = cardBackground
     ) {
@@ -121,22 +121,19 @@ fun PokemonCard(cardBackground: Color,mainActions: MainActions,pokemon: Pokemon,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 6.dp, start = 6.dp, end = 6.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = pokemon.name,
+                        style = Typography.h1.merge(),
                         color = Color.Blue,
                         fontWeight = FontWeight.Bold
                     )
-                    Text(
-                        text = index.toString(),
-                        color = Color.Black,
-                        textAlign = TextAlign.Center,
-                    )
+
                 }
                 SubcomposeAsyncImage(
-                    model = getImageUrl(pokemon.url),
+                    model = PokemonUtils.getImageUrl(pokemon.url),
                     contentDescription = "null",
                     alignment = Alignment.Center
                 ) {

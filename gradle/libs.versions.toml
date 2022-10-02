@@ -24,6 +24,7 @@ toolbar = "2.3.4"
 motion = "1.0.0-rc01"
 segmented = "1.0.0"
 ramcosta = "1.5.20-beta"
+pallete = "1.0.0"
 
 
 
@@ -60,6 +61,7 @@ androidx-paging = {module = "androidx.paging:paging-runtime",version.ref = "pagi
 androidx-paging-ktx = {module = "androidx.paging:paging-common-ktx",version.ref = "paging"}
 androidx-paging-compose = {module = "androidx.paging:paging-compose",version.ref = "pagingCompose"}
 androidx-hilt-navigation = {module = "androidx.hilt:hilt-navigation-compose",version.ref = "hiltNavigation"}
+androidx-pallete = {module = "androidx.palette:palette",version.ref ="pallete"}
 
 retrofit = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 gson  = {module = "com.google.code.gson:gson",version.ref = "gson"}

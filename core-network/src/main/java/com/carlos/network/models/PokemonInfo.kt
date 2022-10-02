@@ -15,13 +15,19 @@ class PokemonInfo(
     val SPD: Int = Random.nextInt(maxSpeed),
     val exp: Int = Random.nextInt(maxExp),
     val height: Int,
+    val species: Specie,
     val weight: Int,
-    val stats: List<Stats>
+    val stats: List<Stats>,
+    val types: List<TypeResponse>
 ) {
 
 
-    fun getWeightString(): String = String.format("%.1f KG", weight.toFloat() / 10)
-    fun getHeightString(): String = String.format("%.1f M", height.toFloat() / 10)
+    fun getWeightStringKg(): String = String.format("%.1f KG", weight.toFloat() / 10)
+    fun getWeightStringHm(): String = weight.toString().plus("HM")
+
+    fun getHeightStringMtr(): String = String.format("%.1f M", height.toFloat() / 10)
+    fun getHeightStringFt(): String = height.toString().plus(" '")
+
     fun getHpFloat(base_stat: Int): Float =  (base_stat/ maxHp).toFloat()
     fun getAttackString(): String = "$ATK/$maxAttack"
     fun getDefenseString(): String = "$DEF/$maxDefense"
@@ -40,3 +46,9 @@ class PokemonInfo(
 data class Stats(val base_stat: Int,val stat: Stat)
 
 data class Stat(val name: String)
+
+data class TypeResponse(val slot: Int,var type: Type)
+
+data class Type(var name: String)
+
+data class Specie(val name: String,val url: String)

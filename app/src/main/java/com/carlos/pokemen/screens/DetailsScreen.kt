@@ -38,7 +38,7 @@ import kotlin.random.Random
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?,imageUrl: String?) {
+fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?) {
     Log.d("NamePokemon", index!!.toString())
 
     detailsViewModel.fetchPokemonDetails(name = name!!)
@@ -68,7 +68,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
 
             Column(modifier = Modifier.fillMaxSize()) {
 
-                PokemonInfo(pokemonInfo = detailsViewModel.pokemonInfo.value, index = index, imageUrl = imageUrl)
+                PokemonInfo(pokemonInfo = detailsViewModel.pokemonInfo.value, index = index, imageUrl = PokemonUtils.getImageUrl("https://pokeapi.co/api/v2/pokemon-species/6/"))
                 Spacer(modifier = Modifier.size(5.dp))
                 MoreInfo(pokemonInfo = detailsViewModel.pokemonInfo.value)
                 Spacer(modifier = Modifier.size(5.dp))
@@ -232,7 +232,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
 
 
                 AsyncImage(
-                    model = imageUrl,
+                    model = PokemonUtils.getImageUrl(pokemonInfo.species.url),
                     modifier = Modifier
                         .align(CenterVertically)
                         .height(150.dp)
