@@ -1,4 +1,4 @@
 # Pokemen
 
 
-## \[  Developing 👷‍♀️⛏👷🔧️👷🔧] Pokemen
+## \[  Developing... 👷‍♀️⛏👷🔧️👷🔧] Pokemen
