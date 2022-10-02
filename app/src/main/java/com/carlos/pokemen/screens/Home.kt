@@ -27,6 +27,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.carlos.pokemen.getImageUrl
 import com.carlos.pokemen.navigation.MainActions
+import com.carlos.pokemen.ui.theme.Typography
 import com.carlos.pokemen.ui.theme.statusColor
 import com.carlos.pokemen.viewmodels.HomeViewModel
 import me.onebone.toolbar.CollapsingToolbarScaffold
@@ -76,7 +77,7 @@ fun CollapsingToolbar() {
             Text(
                 text = "Who are you looking for?",
                 color = Color.White,
-                fontWeight = FontWeight.Bold
+                style = Typography.caption
             )
             Spacer(modifier = Modifier.size(10.dp))
             TextField(
@@ -101,7 +102,7 @@ fun CollapsingToolbar() {
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Filled.Search,
-                        contentDescription = "",
+                        contentDescription = "null",
                         tint = Color.Black
                     )
                 },
