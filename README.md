@@ -6,3 +6,4 @@
 **Screenshots**
 
 PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  
+--- | --- |
