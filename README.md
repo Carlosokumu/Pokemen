@@ -5,4 +5,4 @@
 
 **Screenshots**
 
-PokemonList(Expanded Toolbar) screen | PokemonList(Collapsed Toolbar)  |
+PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  
