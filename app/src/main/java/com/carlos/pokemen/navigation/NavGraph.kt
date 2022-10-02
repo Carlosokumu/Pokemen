@@ -28,10 +28,10 @@ fun NavGraph() {
         }
 
         //Details Screen
-        composable(Screen.DetailsScreen.route  + "/{name}" + "/{index}" , arguments = listOf(
-            navArgument("name") { type = NavType.StringType },navArgument("index") { type = NavType.IntType }
+        composable(Screen.DetailsScreen.route  + "/{name}" + "/{index}"  + "/{imageUrl}" , arguments = listOf(
+            navArgument("name") { type = NavType.StringType },navArgument("index") { type = NavType.IntType },navArgument("imageUrl") { type = NavType.StringType }
         )) {
-             DetailsScreen(detailsViewModel = hiltViewModel(),it.arguments?.getString("name"),it.arguments?.getInt("index"))
+             DetailsScreen(detailsViewModel = hiltViewModel(),it.arguments?.getString("name"),it.arguments?.getInt("index"),it.arguments?.getString("imageUrl"))
         }
 
 
@@ -41,7 +41,7 @@ fun NavGraph() {
 class MainActions(private val navController: NavHostController) {
 
 
-    val gotoDetailsScreen: (name: String,index: Int) -> Unit = { name,index ->
-        navController.navigate(route =Screen.DetailsScreen.route + "/${name}" + "/$index")
+    val gotoDetailsScreen: (name: String,index: Int,imageUrl: String) -> Unit = { name,index,imageUrl ->
+        navController.navigate(route =Screen.DetailsScreen.route + "/${name}" + "/$index" +  "/$imageUrl")
     }
 }

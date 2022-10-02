@@ -38,7 +38,7 @@ import kotlin.random.Random
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?) {
+fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?,imageUrl: String?) {
     Log.d("NamePokemon", index!!.toString())
 
     detailsViewModel.fetchPokemonDetails(name = name!!)
@@ -68,7 +68,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
 
             Column(modifier = Modifier.fillMaxSize()) {
 
-                PokemonInfo(pokemonInfo = detailsViewModel.pokemonInfo.value, index = index)
+                PokemonInfo(pokemonInfo = detailsViewModel.pokemonInfo.value, index = index, imageUrl = imageUrl)
                 Spacer(modifier = Modifier.size(5.dp))
                 MoreInfo(pokemonInfo = detailsViewModel.pokemonInfo.value)
                 Spacer(modifier = Modifier.size(5.dp))
@@ -132,7 +132,7 @@ fun TopBar() {
 
 
 @Composable
-fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int) {
+fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
 
     Card(
         modifier = Modifier
@@ -212,7 +212,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int) {
                                 modifier = Modifier,
                                 style = Typography.h2.merge()
                             )
-                            // Spacer(modifier = Modifier.size(2.dp))
+
                             LinearProgressIndicator(
                                 progress = pokemonInfo.getHpFloat(stat.base_stat),
                                 color = PokemonUtils.getColor(stat.stat.name),
@@ -222,7 +222,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int) {
                                     .padding(start = 10.dp)
 
                             )
-                            // Spacer(modifier = Modifier.size(10.dp))
+
                         }
 
                     }
@@ -232,7 +232,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int) {
 
 
                 AsyncImage(
-                    model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                    model = imageUrl,
                     modifier = Modifier
                         .align(CenterVertically)
                         .height(150.dp)
