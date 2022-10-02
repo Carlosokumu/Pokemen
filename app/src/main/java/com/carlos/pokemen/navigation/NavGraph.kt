@@ -12,7 +12,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.carlos.pokemen.screens.DetailsScreen
 import com.carlos.pokemen.screens.Home
-import okhttp3.internal.threadName
 
 @ExperimentalMaterialApi
 @Composable
@@ -31,7 +30,11 @@ fun NavGraph() {
         composable(Screen.DetailsScreen.route  + "/{name}" + "/{index}"  + "/{imageUrl}" , arguments = listOf(
             navArgument("name") { type = NavType.StringType },navArgument("index") { type = NavType.IntType },navArgument("imageUrl") { type = NavType.StringType }
         )) {
-             DetailsScreen(detailsViewModel = hiltViewModel(),it.arguments?.getString("name"),it.arguments?.getInt("index"),it.arguments?.getString("imageUrl"))
+             DetailsScreen(
+                 detailsViewModel = hiltViewModel(),
+                 it.arguments?.getString("name"),
+                 it.arguments?.getInt("index")
+             )
         }
 
 
