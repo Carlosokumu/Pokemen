@@ -21,6 +21,26 @@ val statusColor = Color(0xff0D47A1)
 val Whitemain = Color(0xfffafafa)
 
 
+val electric = Color(0xffE0E64B)
+val fairy = Color(0xff9E1A44)
+val fire = Color(0xffB22328)
+val flying = Color(0xff90B1C5)
+val fighting = Color(0xff9F422A)
+val poison = Color(0xff642785)
+val rock = Color(0xff4B190E)
+val  steel = Color(0xff5C756D)
+val psychic = Color(0xffAC296B)
+val skyBlue = Color(0xff57A8D8)
+val ghost = Color(0xff363069)
+val dragon = Color(0xff378A94)
+val ground = Color(0xffAD7235)
+val dark = Color(0xff040706)
+val grass = Color(0xff007C42)
+val ice = Color(0xff7ECFF2)
+val bug = Color(0xff179A55)
+
+
+
 val white = Color(0xffffffff)
 val black = Color(0xff000000)
 val paleWhite = Color(0xfff3f7f9)
