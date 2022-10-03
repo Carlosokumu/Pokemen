@@ -3,8 +3,10 @@ package com.carlos.network.models
 import com.google.gson.annotations.SerializedName
 import kotlin.random.Random
 
-class PokemonInfo(
+
+data class PokemonInfo(
     val name: String,
+    val  id: Int,
     @SerializedName("hp")
     val HP: Int = Random.nextInt(maxHp),
     @SerializedName("attack")
