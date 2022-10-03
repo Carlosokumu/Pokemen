@@ -1,11 +1,11 @@
 package com.carlos.pokemen.screens
 
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -29,48 +29,56 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.carlos.network.models.PokemonInfo
 import com.carlos.network.models.PokemonState
+import com.carlos.network.models.TypeResponse
 import com.carlos.pokemen.sharedcomposable.BackButton
 import com.carlos.pokemen.ui.theme.*
 import com.carlos.pokemen.utils.PokemonUtils
 import com.carlos.pokemen.viewmodels.DetailsViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random
 
 
-@SuppressLint("StateFlowValueCalledInComposition")
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?) {
-    Log.d("NamePokemon", index!!.toString())
+    LaunchedEffect(key1 = 10) {
+        detailsViewModel.fetchPokemonDetails(name = name!!)
+    }
 
-    detailsViewModel.fetchPokemonDetails(name = name!!)
+
     var isLoading by remember { mutableStateOf(true) }
 
+    val uiState: PokemonState by detailsViewModel.pokemonState.collectAsState((PokemonState.Loading))
 
-    when (val result = detailsViewModel.pokemonState.collectAsState(PokemonState.Loading).value) {
+
+    when (uiState) {
         is PokemonState.Loading -> {
             isLoading = true
-            Log.d("Load", "Loading")
         }
         is PokemonState.Error -> {
             isLoading = false
-            Log.d("Error", "Error")
+
         }
         is PokemonState.Result -> {
             isLoading = false
-            detailsViewModel.setDetails(result.data)
-            Log.d("Result", "ReSULT")
+            detailsViewModel.setDetails((uiState as PokemonState.Result).data)
+            detailsViewModel.setStats((uiState as PokemonState.Result).data.stats)
         }
     }
     if (isLoading) {
-        Log.d("Load", "Loading")
+        CircularProgressIndicator(color = statusColor)
     } else {
 
-        Scaffold(topBar = { TopBar(name = name, index = index) }) {
+        Scaffold(topBar = { TopBar(detailsViewModel.pokemonInfo.collectAsState().value) }) {
 
             Column(modifier = Modifier.fillMaxSize()) {
 
-                PokemonInfo(pokemonInfo = detailsViewModel.pokemonInfo.value, index = index, imageUrl = PokemonUtils.getImageUrl("https://pokeapi.co/api/v2/pokemon-species/6/"))
+                PokemonInfo(
+                    pokemonInfo = detailsViewModel.pokemonInfo.collectAsState().value,
+                    detailsViewModel = detailsViewModel
+                )
                 Spacer(modifier = Modifier.size(5.dp))
-                MoreInfo(pokemonInfo = detailsViewModel.pokemonInfo.value)
+                MoreInfo(pokemonInfo = detailsViewModel.pokemonInfo.collectAsState().value)
                 Spacer(modifier = Modifier.size(5.dp))
 
             }
@@ -83,7 +91,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
 
 
 @Composable
-fun TopBar(name: String, index: Int) {
+fun TopBar(pokemonInfo: PokemonInfo) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,9 +101,14 @@ fun TopBar(name: String, index: Int) {
     ) {
         BackButton(modifier = Modifier.padding(10.dp)) {
         }
-        Text(text = name, style = Typography.h1,color = Color.White, modifier = Modifier.padding(10.dp))
         Text(
-            text = "#00".plus(index.toString()),
+            text = pokemonInfo.name,
+            style = Typography.h1,
+            color = Color.White,
+            modifier = Modifier.padding(10.dp)
+        )
+        Text(
+            text = PokemonUtils.getIndex(pokemonInfo.id),
             style = Typography.h1,
             color = Color.White,
             modifier = Modifier.padding(10.dp)
@@ -131,8 +144,10 @@ fun TopBar() {
 }
 
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
+fun PokemonInfo(pokemonInfo: PokemonInfo, detailsViewModel: DetailsViewModel) {
+
 
     Card(
         modifier = Modifier
@@ -142,7 +157,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
     ) {
         Column(verticalArrangement = Arrangement.SpaceEvenly) {
             Text(
-                text = "#00".plus(index.toString()),
+                text = PokemonUtils.getIndex(pokemonInfo.id),
                 color = Color.Black,
                 style = Typography.h3,
                 modifier = Modifier.padding(start = 40.dp)
@@ -158,35 +173,12 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
                     color = statusColor,
                     style = Typography.h1.merge()
                 )
+                Spacer(modifier = Modifier.size(15.dp))
 
                 Row {
-                    Text(
-                        text = "Poison", style = typography.body1.merge(), modifier = Modifier
-                            .clip(
-                                shape = RoundedCornerShape(
-                                    size = 5.dp,
-                                ),
-                            )
 
-                            .background(Color.Green)
-                            .padding(5.dp)
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                    Text(
-                        text = "Poison", style = typography.body1.merge(), modifier = Modifier
-                            .clip(
-                                shape = RoundedCornerShape(
-                                    size = 5.dp,
-                                ),
-                            )
-
-                            .background(mainColor)
-                            .padding(5.dp)
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
+                    LazyRowDemo(pokemonInfo.types)
                 }
-
-
             }
             Row(
                 modifier = Modifier
@@ -196,8 +188,9 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
             ) {
 
                 LazyColumn(userScrollEnabled = false, modifier = Modifier.wrapContentHeight()) {
-                    items(pokemonInfo.stats) { stat ->
-                        Log.d("PROGRESS",(stat.base_stat/100).toString())
+                    items(pokemonInfo.stats, itemContent = { stat ->
+
+
                         Row(
                             modifier = Modifier
                                 .wrapContentHeight()
@@ -214,7 +207,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
                             )
 
                             LinearProgressIndicator(
-                                progress = pokemonInfo.getHpFloat(stat.base_stat),
+                                progress = (stat.base_stat * 0.01).toFloat(),
                                 color = PokemonUtils.getColor(stat.stat.name),
                                 modifier = Modifier
                                     .height(5.dp)
@@ -225,7 +218,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, index: Int,imageUrl: String?) {
 
                         }
 
-                    }
+                    })
                 }
 
 
@@ -320,7 +313,6 @@ fun PokemonInfo() {
 
                         ) {
                             Text(text = "ATK", modifier = Modifier, style = Typography.h2.merge())
-                            // Spacer(modifier = Modifier.size(2.dp))
                             LinearProgressIndicator(
                                 progress = 0.5F, color = Red900, modifier = Modifier
                                     .height(5.dp)
@@ -539,7 +531,6 @@ fun MoreInfo() {
             )
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    // Text(text = "Breeding", color = Color.Black)
                     Spacer(modifier = Modifier.size(10.dp))
                     Row(
                         modifier = Modifier
@@ -641,5 +632,25 @@ fun MoreInfo() {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun LazyRowDemo(abilities: List<TypeResponse>) {
+
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(end = 10.dp)) {
+        items(items = abilities, itemContent = { item ->
+            Text(
+                text = item.type.name, style = typography.body1.merge(), modifier = Modifier
+                    .clip(
+                        shape = RoundedCornerShape(
+                            size = 5.dp,
+                        ),
+                    )
+
+                    .background(PokemonUtils.getTypeColor(item.type.name))
+                    .padding(5.dp)
+            )
+        })
     }
 }
