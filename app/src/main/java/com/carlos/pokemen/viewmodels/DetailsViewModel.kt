@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.carlos.network.models.PokemonInfo
 import com.carlos.network.models.PokemonState
 import com.carlos.network.models.Specie
+import com.carlos.network.models.Stats
 import com.carlos.network.network.ApiCallResult
 import com.carlos.pokemen.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +27,7 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
 
 
     private val _pokemonInfo: MutableStateFlow<PokemonInfo> = MutableStateFlow(PokemonInfo(
+        id = 0,
         name = "null",
         HP = 0,
         ATK = 0,
@@ -40,6 +42,10 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
     ))
 
     val pokemonInfo = _pokemonInfo.asStateFlow()
+
+    private val _stats: MutableStateFlow<List<Float>> = MutableStateFlow(listOf())
+
+    val stats = _stats.asStateFlow()
 
 
     fun fetchPokemonDetails(name: String){
@@ -62,6 +68,13 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
 
     fun setDetails(pokemonInfo: PokemonInfo){
        _pokemonInfo.value = pokemonInfo
+    }
+
+    fun setStats(stats: List<Stats>){
+        val mappedStats = stats.map {
+            (it.base_stat/100).toFloat()
+        }
+        _stats.value = mappedStats
     }
 
 }
