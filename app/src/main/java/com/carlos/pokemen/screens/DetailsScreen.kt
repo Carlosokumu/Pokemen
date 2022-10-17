@@ -1,6 +1,5 @@
 package com.carlos.pokemen.screens
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -74,8 +73,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
             Column(modifier = Modifier.fillMaxSize()) {
 
                 PokemonInfo(
-                    pokemonInfo = detailsViewModel.pokemonInfo.collectAsState().value,
-                    detailsViewModel = detailsViewModel
+                    pokemonInfo = detailsViewModel.pokemonInfo.collectAsState().value
                 )
                 Spacer(modifier = Modifier.size(5.dp))
                 MoreInfo(pokemonInfo = detailsViewModel.pokemonInfo.collectAsState().value)
@@ -146,7 +144,7 @@ fun TopBar() {
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun PokemonInfo(pokemonInfo: PokemonInfo, detailsViewModel: DetailsViewModel) {
+fun PokemonInfo(pokemonInfo: PokemonInfo) {
 
 
     Card(
@@ -177,7 +175,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo, detailsViewModel: DetailsViewModel) {
 
                 Row {
 
-                    LazyRowDemo(pokemonInfo.types)
+                    RowAbilities(pokemonInfo.types)
                 }
             }
             Row(
@@ -636,7 +634,7 @@ fun MoreInfo() {
 }
 
 @Composable
-fun LazyRowDemo(abilities: List<TypeResponse>) {
+fun RowAbilities(abilities: List<TypeResponse>) {
 
     LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(end = 10.dp)) {
         items(items = abilities, itemContent = { item ->
