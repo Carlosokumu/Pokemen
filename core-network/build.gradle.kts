@@ -53,4 +53,8 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.okhttp)
 
+    //Room
+    implementation(libs.androidx.room)
+    annotationProcessor(libs.androidx.room.compiler)
+
 }
