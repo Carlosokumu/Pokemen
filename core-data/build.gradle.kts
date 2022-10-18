@@ -35,6 +35,10 @@ android {
 
 dependencies {
 
+
+    implementation(project(":core-model"))
+    implementation(project(":core-network"))
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.6.1")
@@ -54,4 +58,5 @@ dependencies {
     implementation(libs.androidx.paging.compose)
 
     implementation(libs.gson)
+    implementation(libs.retrofit)
 }
