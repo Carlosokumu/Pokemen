@@ -115,6 +115,11 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.manifest)
 
 
+    //Room
+    implementation(libs.androidx.room)
+    annotationProcessor(libs.androidx.room.compiler)
+
+
 
 
 
