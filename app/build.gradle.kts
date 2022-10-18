@@ -67,6 +67,8 @@ dependencies {
     // modules
     implementation(project(":core-network"))
 
+    implementation(project(":core-data"))
+
 
     // androidx
     implementation(libs.androidx.ktx)
