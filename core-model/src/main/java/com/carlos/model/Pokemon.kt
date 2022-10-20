@@ -1,4 +1,4 @@
-package com.carlos.network.models
+package com.carlos.model
 
 data class Pokemon(
     var page: Int = 0,
