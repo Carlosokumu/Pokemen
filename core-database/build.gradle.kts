@@ -37,6 +37,9 @@ android {
 
 dependencies {
 
+
+
+    implementation(project(":core-model"))
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.6.1")
@@ -44,8 +47,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    implementation(libs.androidx.room)
-    annotationProcessor(libs.androidx.room.compiler)
+//    implementation(libs.androidx.room)
+//    kapt(libs.androidx.room.compiler)
+//    implementation(libs.androidx.room.extensions)
+    val roomVersion = "2.3.0-alpha03"
+    implementation("androidx.room:room-runtime:2.5.0-beta01")
+    //kapt ("androidx.room:room-runtime:$roomVersion"
+    kapt("androidx.room:room-compiler:2.5.0-beta01")
+    implementation("androidx.room:room-ktx:2.5.0-beta01")
+    implementation("androidx.room:room-paging:2.5.0-beta01")
 
 
     implementation(libs.hilt.android)
