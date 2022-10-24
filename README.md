@@ -21,8 +21,8 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) -The Paging library helps you load and display pages of data from a larger dataset from local storage or over network. This approach allows your app to use both network bandwidth and system resources more efficiently.
     * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android) -A dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
     * [Jetpack](https://developer.android.com/jetpack)
-        * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+        * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Lifecycle-aware components perform actions in response to a change in the lifecycle status of another component, such as activities and fragments.
+        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) -The ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way.
      * [Room](https://developer.android.com/training/data-storage/room) - The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
    
  * Architecture
