@@ -1,7 +1,7 @@
 # Pokemen
 
 
-## \[  Developing... 👷‍♀️⛏👷🔧️👷🔧] Pokemen
+##  Pokemen is bult on jetpack compose by consuming [POKEAPI](https://pokeapi.co/) and creating an infinite list using the  characters.
 
 **Screenshots**
 
