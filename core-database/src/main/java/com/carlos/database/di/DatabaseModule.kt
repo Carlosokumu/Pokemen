@@ -3,6 +3,7 @@ package com.carlos.database.di
 import android.app.Application
 import androidx.room.Room
 import com.carlos.database.PokemonDatabase
+import com.carlos.database.dao.PokemonDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +25,15 @@ object DatabaseModule {
             .databaseBuilder(application, PokemonDatabase::class.java, "pokemen.db")
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+
+    @Provides
+    @Singleton
+    fun providePokemonDao(
+        pokemonDatabase: PokemonDatabase
+    ): PokemonDao {
+        return pokemonDatabase.pokemonDao()
     }
 
 
