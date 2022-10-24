@@ -20,6 +20,9 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Jetpack](https://developer.android.com/jetpack)
         * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+   
+ * Architecture
+    * MVVM - Model View View Model       
 
 * Gradle
    * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
