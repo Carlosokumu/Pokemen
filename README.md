@@ -14,3 +14,5 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Compose](https://developer.android.com/jetpack/compose)
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
+    * [Retrofit](https://square.github.io/retrofit/)
+    * [Paging 3]("https://developer.android.com/topic/libraries/architecture/paging/v3-overview")
