@@ -16,4 +16,4 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
     * [Retrofit](https://square.github.io/retrofit/)
     * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
-    *[Hilt-Dagger ](https://developer.android.com/training/dependency-injection/hilt-android)
+    * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)
