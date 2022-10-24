@@ -12,3 +12,5 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
 * Technologies used
     * [Kotlin](https://kotlinlang.org/)
     * [Compose](https://developer.android.com/jetpack/compose)
+    * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+    * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
