@@ -17,3 +17,6 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Retrofit](https://square.github.io/retrofit/)
     * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
     * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)
+    * [Jetpack](https://developer.android.com/jetpack)
+        * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
+        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
