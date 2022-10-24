@@ -22,3 +22,4 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
 * Gradle
+   * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
