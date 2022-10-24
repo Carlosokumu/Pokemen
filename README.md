@@ -17,11 +17,12 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
     * [Retrofit](https://square.github.io/retrofit/)
-    * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
-    * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)
+    * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) -The Paging library helps you load and display pages of data from a larger dataset from local storage or over network. This approach allows your app to use both network bandwidth and system resources more efficiently.
+    * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android) -
     * [Jetpack](https://developer.android.com/jetpack)
         * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+     * [Room](https://developer.android.com/training/data-storage/room) - The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
    
  * Architecture
     * MVVM - Model View View Model       
