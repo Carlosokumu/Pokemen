@@ -1,22 +1,25 @@
 package com.carlos.pokemen.screens
 
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.palette.graphics.Palette
 import coil.ImageLoader
@@ -27,10 +30,13 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.size.Size
-import com.carlos.network.models.Pokemon
+import com.carlos.database.entity.PokemonEntity
+import com.carlos.database.mapper.asDomain
+import com.carlos.model.Pokemon
 import com.carlos.pokemen.navigation.MainActions
 import com.carlos.pokemen.ui.theme.Typography
 import com.carlos.pokemen.utils.PokemonUtils
+import com.carlos.pokemen.utils.isScrolledToEnd
 import com.carlos.pokemen.viewmodels.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -38,23 +44,21 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActions: MainActions) {
-
+    val scrollState = rememberLazyGridState()
 
     val pokemons = homeViewModel.pokemon.value.collectAsLazyPagingItems()
-    LaunchedEffect(key1 = 10) {
-        homeViewModel.getPokemonList()
-    }
 
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
-        state = state
+        state =  scrollState
     ) {
 
         items(pokemons.itemCount) { index ->
             val context = LocalContext.current
             val loader = ImageLoader(context)
+
 
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -63,6 +67,8 @@ fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActi
                     .size(Size.ORIGINAL) // Set the target size to load the image at.
                     .build()
             )
+
+
             if (painter.state is AsyncImagePainter.State.Success) {
                 var color = 123342
                 LaunchedEffect(key1 = painter) {
@@ -77,17 +83,14 @@ fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActi
                             homeViewModel.setColor(dominantSwatch)
                             color = dominantSwatch
                         }
-
-                        pokemons[index]!!.color = homeViewModel.color.value
-
                     }
 
                 }
 
                 PokemonCard(
-                    cardBackground = Color( pokemons[index]!!.color),
+                    cardBackground = Color( pokemons[index]!!.asDomain().color),
                     mainActions = mainActions,
-                    pokemon = pokemons[index]!!,
+                    pokemon = pokemons[index]!!.asDomain(),
                     index = index
                 )
 
@@ -99,7 +102,7 @@ fun PokemonListView(homeViewModel: HomeViewModel, state: LazyGridState, mainActi
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PokemonCard(cardBackground: Color,mainActions: MainActions,pokemon: Pokemon,index: Int){
+fun PokemonCard(cardBackground: Color, mainActions: MainActions, pokemon: Pokemon, index: Int){
     Card(
         modifier = Modifier.padding(4.dp),
         elevation = 10.dp,
