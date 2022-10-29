@@ -1,13 +1,14 @@
 package com.carlos.data
 
-import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.paging.*
-import com.carlos.data.paging.NetworkMediator
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.carlos.data.paging.PokemonPagingDatasource
 import com.carlos.database.PokemonDatabase
-import com.carlos.database.dao.PokemonDao
 import com.carlos.database.entity.PokemonEntity
-import com.carlos.model.Pokemon
+import com.carlos.database.mapper.asDomain
+import com.carlos.database.mapper.asEntity
 import com.carlos.model.PokemonInfo
 import com.carlos.network.network.ApiCallResult
 import com.carlos.network.network.ApiClient
@@ -18,20 +19,43 @@ class MainRepositoryImp @Inject constructor(private val apiClient: ApiClient,pri
 
 
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun fetchPokemonList(page: Int): Flow<PagingData<PokemonEntity>> {
-        val result =  pokemonDatabase.pokemonDao().getPokemonList(page = page)
-        Log.d("RESULTSIZE",page.toString())
+    override suspend fun fetchPokemonList(): Flow<PagingData<PokemonEntity>> {
         return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = 20),
-            remoteMediator = NetworkMediator(apiClient = apiClient, pokemonDatabase = pokemonDatabase),
             pagingSourceFactory = {
-               result
+                PokemonPagingDatasource(apiClient = apiClient,pokemonDatabase.pokemonDao())
             }
         ).flow
     }
 
-    override suspend fun fetchPokemonInfo(name: String): ApiCallResult<PokemonInfo> {
-        TODO("Not yet implemented")
+    override suspend fun fetchPokemonInfo(name: String): PokemonInfo? {
+        val pokemonInfo = pokemonDatabase.pokemonInfoDao().getPokemonInfo(name_ = name)
+        if ( pokemonInfo == null){
+            return when(val result = apiClient.fetchPokemonInfo(name)){
+                is ApiCallResult.ServerError -> {
+                    null
+                }
+                is ApiCallResult.ApiCallError -> {
+                    null
+                }
+                is ApiCallResult.Success -> {
+                    pokemonDatabase.pokemonInfoDao().insertPokemonInfo(result.data.asEntity())
+                    result.data
+                }
+            }
+        }
+        else {
+            return  pokemonInfo.asDomain()
+        }
+    }
+
+    override suspend fun fetchPokemonListTwo(): Flow<PagingData<PokemonEntity>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = 20),
+            pagingSourceFactory = {
+                PokemonPagingDatasource(apiClient = apiClient,pokemonDatabase.pokemonDao())
+            }
+        ).flow
     }
 
 
