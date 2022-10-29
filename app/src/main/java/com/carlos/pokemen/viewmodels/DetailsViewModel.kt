@@ -2,6 +2,7 @@ package com.carlos.pokemen.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.carlos.data.MainRepository
 import com.carlos.model.PokemonInfo
 import com.carlos.model.PokemonState
@@ -66,5 +67,7 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
         }
         _stats.value = mappedStats
     }
+
+
 
 }

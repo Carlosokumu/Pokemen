@@ -89,6 +89,9 @@ dependencies {
 
     implementation(libs.androidx.pallete)
 
+    //Lottie
+    implementation(libs.lottie)
+
 
 
 

@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -26,12 +27,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.carlos.model.PokemonInfo
 import com.carlos.model.TypeResponse
 import com.carlos.pokemen.sharedcomposable.BackButton
 import com.carlos.pokemen.ui.theme.*
 import com.carlos.pokemen.utils.PokemonUtils
 import com.carlos.pokemen.viewmodels.DetailsViewModel
+import com.example.pokedex.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random
 
@@ -64,7 +69,10 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
         }
     }
     if (isLoading) {
-        CircularProgressIndicator(color = statusColor)
+        //CircularProgressIndicator(color = statusColor)
+        Box(contentAlignment = Center, modifier = Modifier.fillMaxSize()) {
+            Loader()
+        }
     } else {
 
         Scaffold(topBar = { TopBar(detailsViewModel.pokemonInfo.collectAsState().value) }) {
@@ -653,4 +661,12 @@ fun RowAbilities(abilities: List<TypeResponse>) {
             )
         })
     }
+}
+
+
+
+@Composable
+fun Loader() {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.pokeballloading))
+    LottieAnimation(composition, modifier = Modifier.size(100.dp))
 }
