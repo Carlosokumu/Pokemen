@@ -26,9 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.carlos.network.models.PokemonInfo
-import com.carlos.network.models.PokemonState
-import com.carlos.network.models.TypeResponse
+import com.carlos.model.PokemonInfo
+import com.carlos.model.TypeResponse
 import com.carlos.pokemen.sharedcomposable.BackButton
 import com.carlos.pokemen.ui.theme.*
 import com.carlos.pokemen.utils.PokemonUtils
@@ -47,21 +46,21 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
 
     var isLoading by remember { mutableStateOf(true) }
 
-    val uiState: PokemonState by detailsViewModel.pokemonState.collectAsState((PokemonState.Loading))
+    val uiState: com.carlos.model.PokemonState by detailsViewModel.pokemonState.collectAsState((com.carlos.model.PokemonState.Loading))
 
 
     when (uiState) {
-        is PokemonState.Loading -> {
+        is com.carlos.model.PokemonState.Loading -> {
             isLoading = true
         }
-        is PokemonState.Error -> {
+        is com.carlos.model.PokemonState.Error -> {
             isLoading = false
 
         }
-        is PokemonState.Result -> {
+        is com.carlos.model.PokemonState.Result -> {
             isLoading = false
-            detailsViewModel.setDetails((uiState as PokemonState.Result).data)
-            detailsViewModel.setStats((uiState as PokemonState.Result).data.stats)
+//            detailsViewModel.setDetails((uiState as com.carlos.model.PokemonState.Result).data)
+//            detailsViewModel.setStats((uiState as com.carlos.model.PokemonState.Result).data.stats)
         }
     }
     if (isLoading) {
@@ -636,7 +635,10 @@ fun MoreInfo() {
 @Composable
 fun RowAbilities(abilities: List<TypeResponse>) {
 
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(end = 10.dp)) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(end = 10.dp)
+    ) {
         items(items = abilities, itemContent = { item ->
             Text(
                 text = item.type.name, style = typography.body1.merge(), modifier = Modifier
