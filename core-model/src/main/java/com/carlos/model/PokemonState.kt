@@ -1,4 +1,4 @@
-package com.carlos.network.models
+package com.carlos.model
 
 
 
@@ -6,7 +6,7 @@ package com.carlos.network.models
 sealed class PokemonState {
     object  Loading: PokemonState()
 
-    data class  Result(val data: PokemonInfo): PokemonState()
+    object  Result: PokemonState()
 
     data class  Error(val message: String): PokemonState()
 }
