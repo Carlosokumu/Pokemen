@@ -25,6 +25,9 @@ motion = "1.0.0-rc01"
 segmented = "1.0.0"
 ramcosta = "1.5.20-beta"
 pallete = "1.0.0"
+room = "2.3.0-alpha02"
+lottieVersion = "5.2.0"
+
 
 
 
@@ -62,6 +65,10 @@ androidx-paging-ktx = {module = "androidx.paging:paging-common-ktx",version.ref 
 androidx-paging-compose = {module = "androidx.paging:paging-compose",version.ref = "pagingCompose"}
 androidx-hilt-navigation = {module = "androidx.hilt:hilt-navigation-compose",version.ref = "hiltNavigation"}
 androidx-pallete = {module = "androidx.palette:palette",version.ref ="pallete"}
+androidx-room = {module = "androidx.room:room-runtime",version.ref ="room"}
+androidx-room-compiler = {module = "androidx.room:room-compiler",version.ref ="room"}
+androidx-room-extensions = {module = "androidx.room:room-ktx",version.ref ="room"}
+lottie = {module = "com.airbnb.android:lottie-compose",version.ref = "lottieVersion"}
 
 retrofit = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 gson  = {module = "com.google.code.gson:gson",version.ref = "gson"}
