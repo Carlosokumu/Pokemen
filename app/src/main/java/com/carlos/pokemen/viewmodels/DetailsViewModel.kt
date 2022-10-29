@@ -1,20 +1,15 @@
 package com.carlos.pokemen.viewmodels
 
-import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.carlos.network.models.PokemonInfo
-import com.carlos.network.models.PokemonState
-import com.carlos.network.models.Specie
-import com.carlos.network.models.Stats
-import com.carlos.network.network.ApiCallResult
-import com.carlos.pokemen.data.repository.MainRepository
+import com.carlos.data.MainRepository
+import com.carlos.model.PokemonInfo
+import com.carlos.model.PokemonState
+import com.carlos.model.Specie
+import com.carlos.model.Stats
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,32 +40,27 @@ class DetailsViewModel @Inject constructor(private val mainRepository: MainRepos
 
     private val _stats: MutableStateFlow<List<Float>> = MutableStateFlow(listOf())
 
-    val stats = _stats.asStateFlow()
-
 
     fun fetchPokemonDetails(name: String){
         viewModelScope.launch {
-           when(val result = mainRepository.fetchPokemonInfo(name)){
-               is ApiCallResult.ServerError -> {
-                   mutablePokemonState.value = PokemonState.Error("Server Error")
-               }
-               is ApiCallResult.ApiCallError -> {
-                   mutablePokemonState.value = PokemonState.Error("Connection Error")
-               }
-               is ApiCallResult.Success -> {
-                   mutablePokemonState.value = PokemonState.Result(result.data)
-                   Log.d("Sucess",result.data.name)
-               }
-           }
+           val pokemonInfo = mainRepository.fetchPokemonInfo(name)
+            if (pokemonInfo != null){
+                setDetails(pokemonInfo)
+                setStats(pokemonInfo.stats)
+                mutablePokemonState.value = PokemonState.Result
+            }
+            else{
+               mutablePokemonState.value = PokemonState.Error("Couldn't fetch pokemon Info")
+            }
         }
     }
 
 
-    fun setDetails(pokemonInfo: PokemonInfo){
+    private fun setDetails(pokemonInfo: PokemonInfo){
        _pokemonInfo.value = pokemonInfo
     }
 
-    fun setStats(stats: List<Stats>){
+    private fun setStats(stats: List<Stats>){
         val mappedStats = stats.map {
             (it.base_stat/100).toFloat()
         }
