@@ -1,4 +1,4 @@
-package com.carlos.data
+package com.carlos.data.repository
 
 import androidx.paging.PagingData
 import com.carlos.database.entity.PokemonEntity
@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 interface MainRepository {
 
 
-    suspend fun  fetchPokemonList(page: Int): Flow<PagingData<PokemonEntity>>
 
-    suspend fun fetchPokemonInfo(name: String): ApiCallResult<PokemonInfo>
+
+
+    suspend fun  fetchPokemonList(): Flow<PagingData<PokemonEntity>>
 }
