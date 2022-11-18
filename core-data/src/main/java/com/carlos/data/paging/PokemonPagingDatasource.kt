@@ -26,7 +26,7 @@ class PokemonPagingDatasource(
             val nextKey = params.key ?: POKEMON_STARTING_INDEX
             val cachedList = pokemonDao.getAllPokemonList(page_ = nextKey)
 
-            if (cachedList.isEmpty()) {
+            if (cachedList.isNullOrEmpty()) {
                 val apiData = apiClient.fetchPokemonList(nextKey * OFFSET)
                 if (apiData.results.isNotEmpty()) {
                     apiData.results.map {
