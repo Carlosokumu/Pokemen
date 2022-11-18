@@ -11,6 +11,7 @@ class MainCoroutinesRule @OptIn(ExperimentalCoroutinesApi::class) constructor(
     val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 ) : TestWatcher() {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val testScope = TestScope(testDispatcher)
 
     override fun starting(description: Description) {
