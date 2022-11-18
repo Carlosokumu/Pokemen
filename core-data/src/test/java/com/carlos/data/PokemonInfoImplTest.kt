@@ -46,7 +46,9 @@ class PokemonInfoImplTest {
         assertEquals(expectedItem?.name, mockData.name)
         assertEquals(expectedItem?.id, mockData.id)
         verify(pokemonInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
+        verify(pokemonInfoDao, atLeastOnce()).insertPokemonInfo(pokemonInfo = mockData.asEntity())
         verify(service, atLeastOnce()).fetchPokemonInfo(name = "bulbasaur")
+
 
     }
 
