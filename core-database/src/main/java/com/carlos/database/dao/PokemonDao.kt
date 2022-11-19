@@ -2,10 +2,7 @@ package com.carlos.database.dao
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.carlos.database.entity.PokemonEntity
 
 @OptIn(ExperimentalPagingApi::class)
@@ -18,7 +15,12 @@ interface PokemonDao {
     @Query("SELECT * FROM PokemonEntity WHERE page LIKE :page")
     fun getPokemonList(page: Int): PagingSource<Int,PokemonEntity>
 
-//    @Query("SELECT * FROM PokemonEntity WHERE page <= :page_")
-//    suspend fun getAllPokemonList(page_: Int): List<PokemonEntity>
+    @Query("SELECT * FROM PokemonEntity WHERE page LIKE :page_")
+    suspend fun getAllPokemonList(page_: Int): List<PokemonEntity>
+
+
+    @Query("UPDATE PokemonEntity SET  color =:color WHERE name = :name")
+    suspend fun updateDominantColor(color: Int,name: String)
+
 }
 
