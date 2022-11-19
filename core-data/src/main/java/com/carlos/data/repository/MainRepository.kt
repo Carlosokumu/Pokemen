@@ -8,4 +8,7 @@ interface MainRepository {
 
 
     suspend fun fetchPokemonList(): Flow<PagingData<PokemonEntity>>
+
+
+    suspend fun updateDominantColor(color: Int,name: String)
 }
