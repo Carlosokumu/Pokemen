@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class PokemonEntity(
     var page: Int = 0,
     @PrimaryKey val name: String,
-    val url: String
+    val url: String,
+    val color: Int = -7839624
 )
