@@ -29,7 +29,7 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [JUnit](https://junit.org/junit5/)
     * [MockK](https://github.com/mockk/mockk)
     * [Turbine](https://github.com/cashapp/turbine)
-    * [Roboelectric](https://github.com/robolectric/robolectric)
+    * [Robolectric](https://github.com/robolectric/robolectric)
     
  * Architecture
     * MVVM - Model View View Model       
