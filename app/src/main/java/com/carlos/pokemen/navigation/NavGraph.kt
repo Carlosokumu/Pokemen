@@ -32,7 +32,8 @@ fun NavGraph() {
         )) {
              DetailsScreen(
                  detailsViewModel = hiltViewModel(),
-                 it.arguments?.getString("name")
+                 it.arguments?.getString("name"),
+                 mainActions = actions
              )
         }
 
@@ -45,5 +46,10 @@ class MainActions(private val navController: NavHostController) {
 
     val gotoDetailsScreen: (name: String,index: Int,imageUrl: String) -> Unit = { name,index,imageUrl ->
         navController.navigate(route =Screen.DetailsScreen.route + "/${name}" + "/$index" +  "/$imageUrl")
+    }
+
+
+    val popBackStack: () -> Unit = {
+        navController.popBackStack()
     }
 }

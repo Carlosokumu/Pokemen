@@ -32,6 +32,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.carlos.model.PokemonInfo
 import com.carlos.model.TypeResponse
+import com.carlos.pokemen.navigation.MainActions
 import com.carlos.pokemen.sharedcomposable.BackButton
 import com.carlos.pokemen.ui.theme.*
 import com.carlos.pokemen.utils.PokemonUtils
@@ -43,7 +44,7 @@ import kotlin.random.Random
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?) {
+fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?,mainActions: MainActions) {
     LaunchedEffect(key1 = 10) {
         detailsViewModel.fetchPokemonDetails(name = name!!)
     }
@@ -74,7 +75,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?) {
         }
     } else {
 
-        Scaffold(topBar = { TopBar(detailsViewModel.pokemonInfo.collectAsState().value) }) {
+        Scaffold(topBar = { TopBar(detailsViewModel.pokemonInfo.collectAsState().value,mainActions) }) {
 
             Column(modifier = Modifier.fillMaxSize()) {
 
@@ -95,7 +96,7 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?) {
 
 
 @Composable
-fun TopBar(pokemonInfo: PokemonInfo) {
+fun TopBar(pokemonInfo: PokemonInfo,mainActions: MainActions) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,6 +105,7 @@ fun TopBar(pokemonInfo: PokemonInfo) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         BackButton(modifier = Modifier.padding(10.dp)) {
+            mainActions.popBackStack()
         }
         Text(
             text = pokemonInfo.name,
