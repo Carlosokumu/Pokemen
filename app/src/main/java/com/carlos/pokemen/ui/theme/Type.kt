@@ -66,6 +66,7 @@ val Typography = Typography(
     h6 = TextStyle(
         fontFamily = poppins,
         fontWeight = FontWeight.ExtraLight,
+        fontSize = 10.sp
     )
 
 

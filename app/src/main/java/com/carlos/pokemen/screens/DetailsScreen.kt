@@ -43,7 +43,7 @@ import kotlin.random.Random
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?) {
+fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?) {
     LaunchedEffect(key1 = 10) {
         detailsViewModel.fetchPokemonDetails(name = name!!)
     }
@@ -54,22 +54,21 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?, index: Int?
     val uiState: com.carlos.model.PokemonState by detailsViewModel.pokemonState.collectAsState((com.carlos.model.PokemonState.Loading))
 
 
-    when (uiState) {
+    isLoading = when (uiState) {
         is com.carlos.model.PokemonState.Loading -> {
-            isLoading = true
+            true
         }
         is com.carlos.model.PokemonState.Error -> {
-            isLoading = false
+            false
 
         }
         is com.carlos.model.PokemonState.Result -> {
-            isLoading = false
-//            detailsViewModel.setDetails((uiState as com.carlos.model.PokemonState.Result).data)
-//            detailsViewModel.setStats((uiState as com.carlos.model.PokemonState.Result).data.stats)
+            false
+
         }
     }
     if (isLoading) {
-        //CircularProgressIndicator(color = statusColor)
+
         Box(contentAlignment = Center, modifier = Modifier.fillMaxSize()) {
             Loader()
         }
@@ -619,6 +618,7 @@ fun MoreInfo() {
                                         text = "204",
                                         color = paleBlack,
                                         style = Typography.h6,
+                                        maxLines = 1,
                                         modifier = Modifier.padding(
                                             top = 10.dp,
                                             bottom = 10.dp,
@@ -664,9 +664,8 @@ fun RowAbilities(abilities: List<TypeResponse>) {
 }
 
 
-
 @Composable
 fun Loader() {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.pokeballloading))
-    LottieAnimation(composition, modifier = Modifier.size(100.dp))
+    LottieAnimation(composition, modifier = Modifier.size(100.dp), isPlaying = true,restartOnPlay = true)
 }

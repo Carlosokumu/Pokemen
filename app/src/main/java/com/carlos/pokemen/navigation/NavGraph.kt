@@ -32,8 +32,7 @@ fun NavGraph() {
         )) {
              DetailsScreen(
                  detailsViewModel = hiltViewModel(),
-                 it.arguments?.getString("name"),
-                 it.arguments?.getInt("index")
+                 it.arguments?.getString("name")
              )
         }
 
