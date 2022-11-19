@@ -65,5 +65,8 @@ dependencies {
     implementation(libs.coroutines)
     implementation(libs.androidx.paging.compose)
     implementation(libs.gson)
+    //testImplementation(libs.robolectric)
+    testImplementation (libs.robolectric)
+    testImplementation(libs.androidx.test.core)
 
 }
