@@ -10,7 +10,7 @@ import com.carlos.database.entity.PokemonInfoEntity
 
 @Database(
     entities = [PokemonEntity::class,PokemonInfoEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 
