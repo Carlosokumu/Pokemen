@@ -17,7 +17,7 @@ PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - A concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - A flow is a type that can emit multiple values sequentially, as opposed to suspend functions that return only a single value. For example, you can use a flow to receive live updates from a database.
     * [Coil](https://coil-kt.github.io/coil/compose/) - An image loading library for Android backed by Kotlin Coroutines.
-    * [Retrofit](https://square.github.io/retrofit/)  - (https://square.github.io/retrofit) -  Retrofit is a REST client for Java/ Kotlin and Android by Square inc under Apache 2.0 license. Its a simple network library that is used for network transactions
+    * [Retrofit](https://square.github.io/retrofit/)  -  Retrofit is a REST client for Java/ Kotlin and Android by Square inc under Apache 2.0 license. Its a simple network library that is used for network transactions
     * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) -The Paging library helps you load and display pages of data from a larger dataset from local storage or over network. This approach allows your app to use both network bandwidth and system resources more efficiently.
     * [Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android) -A dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
     * [Jetpack](https://developer.android.com/jetpack)
