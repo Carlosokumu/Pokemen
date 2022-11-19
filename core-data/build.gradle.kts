@@ -61,4 +61,11 @@ dependencies {
 
     implementation(libs.gson)
     implementation(libs.retrofit)
+
+    //Unit Tests
+    implementation(libs.mockito.kotlin)
+    implementation(libs.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.androidx.test.core)
+
 }
