@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.Dispatcher
 import javax.inject.Inject
 
-class ApiClient @Inject constructor(val dispatcher: CoroutineDispatcher,val pokemenService: PokemenService) {
+open class ApiClient @Inject constructor(val dispatcher: CoroutineDispatcher,val pokemenService: PokemenService) {
 
     suspend fun fetchPokemonList(page: Int) = pokemenService.fetchPokemonList(offset = page)
 
