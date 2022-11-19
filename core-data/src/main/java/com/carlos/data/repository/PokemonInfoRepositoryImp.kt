@@ -9,12 +9,15 @@ import com.carlos.network.network.ApiClient
 import javax.inject.Inject
 
 
-class PokemonInfoRepositoryImp @Inject constructor(private val apiClient: ApiClient, private val  pokemonInfoDao: PokemonInfoDao) : PokemonInfoRepository {
+class PokemonInfoRepositoryImp @Inject constructor(
+    private val apiClient: ApiClient,
+    private val pokemonInfoDao: PokemonInfoDao
+) : PokemonInfoRepository {
 
     override suspend fun fetchPokemonInfo(name: String): PokemonInfo? {
         val pokemonInfo = pokemonInfoDao.getPokemonInfo(name_ = name)
-        if ( pokemonInfo == null){
-            return when(val result = apiClient.fetchPokemonInfo(name)){
+        if (pokemonInfo == null) {
+            return when (val result = apiClient.fetchPokemonInfo(name)) {
                 is ApiCallResult.ServerError -> {
                     null
                 }
@@ -26,9 +29,8 @@ class PokemonInfoRepositoryImp @Inject constructor(private val apiClient: ApiCli
                     result.data
                 }
             }
-        }
-        else {
-            return  pokemonInfo.asDomain()
+        } else {
+            return pokemonInfo.asDomain()
         }
     }
 }
