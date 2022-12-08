@@ -100,7 +100,7 @@ fun TopBar(pokemonInfo: PokemonInfo,mainActions: MainActions) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(statusColor),
+            .background(MaterialTheme.colors.primary),
         verticalAlignment = CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -159,7 +159,7 @@ fun PokemonInfo(pokemonInfo: PokemonInfo) {
         modifier = Modifier
             .padding(4.dp),
         shape = RectangleShape,
-        backgroundColor = Color.White
+       // backgroundColor = Color.White
     ) {
         Column(verticalArrangement = Arrangement.SpaceEvenly) {
             Text(
