@@ -45,7 +45,7 @@ import kotlin.random.Random
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun DetailsScreen(detailsViewModel: DetailsViewModel, name: String?,mainActions: MainActions) {
-    LaunchedEffect(key1 = 10) {
+    LaunchedEffect(key1 = name) {
         detailsViewModel.fetchPokemonDetails(name = name!!)
     }
 
