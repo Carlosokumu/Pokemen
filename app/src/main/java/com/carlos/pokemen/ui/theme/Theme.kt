@@ -21,22 +21,12 @@ private val DarkColorPalette = darkColors(
 
 
 private val LightColorPalette = lightColors(
-//   primary = Purple200,
-//    primaryVariant = Purple200,
-//    secondary = Teal200,
+    primaryVariant = Purple200,
     background = Whitemain,
     surface = Whitemain ,
-//    surface = Color.White,
-//   onPrimary = Color.White,
-//    onSecondary = Color.Black,
-//    onBackground = Color.Black,
-//    onSurface = Color.Black,
-    primary = Whitemain,
-    primaryVariant = Red900,
-    //onPrimary = Color.White,
+    primary =  colorPrimary,
     secondary = Whitemain,
     secondaryVariant = Red900,
-    //onSecondary = Red700,
     error = Red800
 
 
