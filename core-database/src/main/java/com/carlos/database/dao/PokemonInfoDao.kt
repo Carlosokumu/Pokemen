@@ -11,8 +11,6 @@ import com.carlos.database.entity.PokemonInfoEntity
 interface PokemonInfoDao {
 
 
-
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPokemonInfo(pokemonInfo: PokemonInfoEntity)
 
