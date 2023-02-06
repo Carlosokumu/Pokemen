@@ -5,15 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import com.carlos.data.MainRepository
+import com.carlos.data.repository.MainRepository
 import com.carlos.database.entity.PokemonEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,27 +23,24 @@ class HomeViewModel @Inject constructor(private val mainRepository: MainReposito
     val color = _colorValue
 
 
-
     init {
         getPokemonList()
     }
 
 
-
-    private fun  getPokemonList() = viewModelScope.launch {
-        _pokemon.value = mainRepository.fetchPokemonListTwo()
+    private fun getPokemonList() = viewModelScope.launch {
+        _pokemon.value = mainRepository.fetchPokemonList()
     }
 
 
-
-
-
-    fun setColor(color: Int){
+    fun setColor(color: Int) {
         _colorValue.value = color
     }
 
 
-
+    fun updateDominantColor(color: Int, name: String) = viewModelScope.launch {
+        mainRepository.updateDominantColor(color, name)
+    }
 
 }
 
