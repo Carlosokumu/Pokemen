@@ -3,7 +3,6 @@ package com.carlos.pokemen.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.carlos.pokemen.navigation.MainActions
 import com.carlos.pokemen.ui.theme.Typography
-import com.carlos.pokemen.ui.theme.statusColor
 import com.carlos.pokemen.viewmodels.HomeViewModel
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
@@ -31,7 +29,7 @@ fun Home(
     homeViewModel: HomeViewModel = hiltViewModel(), mainActions: MainActions
 ) {
 
-    val lazyScrollState = rememberLazyGridState()
+
     val state =  rememberCollapsingToolbarScaffoldState()
     CollapsingToolbarScaffold(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +40,8 @@ fun Home(
         }
     )
     {
-      PokemonListView(homeViewModel = homeViewModel, state = lazyScrollState, mainActions = mainActions)
+
+       PokemonListView(homeViewModel = homeViewModel, mainActions = mainActions)
     }
 
 }
@@ -55,7 +54,7 @@ fun Home(
 fun CollapsingToolbar() {
     Column(
         modifier = Modifier
-            .background(statusColor),
+            .background(MaterialTheme.colors.primary),
         verticalArrangement = Arrangement.Center
     ) {
         Column(
