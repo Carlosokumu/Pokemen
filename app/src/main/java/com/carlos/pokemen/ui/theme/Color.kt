@@ -15,7 +15,7 @@ val Red900 = Color(0xffc20029)
 
 
 
-val colorPrimary = Color(0xFF6200EEE)
+val colorPrimary = Color(0xff0D47A1)
 val mainColor = Color(0xff0d47a1)
 val statusColor = Color(0xff0D47A1)
 val Whitemain = Color(0xfffafafa)
