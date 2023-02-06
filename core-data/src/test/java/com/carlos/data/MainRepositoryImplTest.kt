@@ -8,7 +8,7 @@ import com.carlos.database.dao.PokemonDao
 import com.carlos.database.mapper.asEntity
 import com.carlos.network.models.PokemonResponse
 import com.carlos.network.network.ApiClient
-import com.carlos.network.network.PokemenService
+import com.carlos.network.network.PokemonService
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +26,7 @@ class MainRepositoryImplTest {
     private lateinit var pagingDatasource: PokemonPagingDatasource
 
 
-    private val service: PokemenService = mock()
+    private val service: PokemonService = mock()
 
     @get:Rule
     val coroutinesRule = MainCoroutinesRule()
