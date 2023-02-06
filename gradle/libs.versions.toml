@@ -27,6 +27,10 @@ ramcosta = "1.5.20-beta"
 pallete = "1.0.0"
 room = "2.3.0-alpha02"
 lottieVersion = "5.2.0"
+mockitoKotlin = "2.2.0"
+turbine = "0.6.0"
+robolectric = "4.9"
+
 
 
 
@@ -68,6 +72,9 @@ androidx-pallete = {module = "androidx.palette:palette",version.ref ="pallete"}
 androidx-room = {module = "androidx.room:room-runtime",version.ref ="room"}
 androidx-room-compiler = {module = "androidx.room:room-compiler",version.ref ="room"}
 androidx-room-extensions = {module = "androidx.room:room-ktx",version.ref ="room"}
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidxTest" }
+
+
 lottie = {module = "com.airbnb.android:lottie-compose",version.ref = "lottieVersion"}
 
 retrofit = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
@@ -88,6 +95,11 @@ androidx-compose-manifest  = {module = "androidx.compose.ui:ui-test-manifest",ve
 
 # unit test
 junit = { module = "junit:junit", version.ref = "junit" }
+mockito-kotlin  = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version.ref = "mockitoKotlin" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+
 
 
 
