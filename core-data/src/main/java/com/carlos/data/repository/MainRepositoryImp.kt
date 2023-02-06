@@ -26,8 +26,8 @@ class MainRepositoryImp @Inject constructor(
         ).flow
     }
 
-    override suspend fun updateDominantColor(color: Int,name: String) {
-        pokemonDao.updateDominantColor(color,name)
+    override suspend fun updateDominantColor(color: Int, name: String) {
+        pokemonDao.updateDominantColor(color, name)
     }
 
 
