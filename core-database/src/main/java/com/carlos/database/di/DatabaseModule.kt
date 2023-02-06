@@ -23,7 +23,7 @@ object DatabaseModule {
         application: Application
     ): PokemonDatabase {
         return Room
-            .databaseBuilder(application, PokemonDatabase::class.java, "pokemen.db")
+            .databaseBuilder(application, PokemonDatabase::class.java, "pokemon.db")
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -41,7 +41,7 @@ object DatabaseModule {
     @Singleton
     fun providePokemonInfoDao(
         pokemonDatabase: PokemonDatabase
-    ):  PokemonInfoDao {
+    ): PokemonInfoDao {
         return pokemonDatabase.pokemonInfoDao()
     }
 
