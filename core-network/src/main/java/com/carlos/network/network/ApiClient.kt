@@ -1,16 +1,14 @@
 package com.carlos.network.network
 
-import com.carlos.network.models.PokemonResponse
 import kotlinx.coroutines.CoroutineDispatcher
-import okhttp3.Dispatcher
 import javax.inject.Inject
 
-open class ApiClient @Inject constructor(val dispatcher: CoroutineDispatcher,val pokemenService: PokemenService) {
+open class ApiClient @Inject constructor(val dispatcher: CoroutineDispatcher,val pokemonService: PokemonService) {
 
-    suspend fun fetchPokemonList(page: Int) = pokemenService.fetchPokemonList(offset = page)
+    suspend fun fetchPokemonList(page: Int) = pokemonService.fetchPokemonList(offset = page)
 
     suspend fun fetchPokemonInfo(name: String) = safeApiCall(dispatcher){
-        return@safeApiCall pokemenService.fetchPokemonInfo(name = name)
+        return@safeApiCall pokemonService.fetchPokemonInfo(name = name)
     }
 
 
