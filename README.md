@@ -6,8 +6,8 @@
 **Screenshots**
 
 PokemonList(Expanded Toolbar) Screen | PokemonList(Collapsed Toolbar)  | Details Screen
---- | --- | --- |
-<img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221002_051214.png" width="280"/> | <img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221002_051346.png" width="280"/> | <img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221003_135413.png" width="280"/>
+--- | --- | --- | --- |
+<img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221002_051214.png" width="280"/> | <img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221002_051346.png" width="280"/> | <img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/Screenshot_20221003_135413.png" width="280"/> | <img src="https://github.com/Carlosokumu/Pokemen/blob/master/shots/gif.gif" width="280"/>
 
 * Technologies used
     * [Kotlin](https://kotlinlang.org/) - Kotlin is a programming language that can run on JVM. Google has announced Kotlin as one of its officially supported programming languages in Android Studio; and the Android community is migrating at a pace from Java to Kotlin.
